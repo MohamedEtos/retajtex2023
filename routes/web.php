@@ -39,6 +39,7 @@ Route::get('viewfile/{cust_name}/{images_name}','App\Http\Controllers\sublimatio
 Route::post('sublimation/delete','App\Http\Controllers\sublimationController@destroy');
 Route::get('sublimation/edit_order/{id}','App\Http\Controllers\sublimationController@edit');
 Route::post('sublimation/update','App\Http\Controllers\sublimationController@update');
+Route::resource('Operationpermissions','App\Http\Controllers\OperationpermissionsController');
 
 
 Route::get('emps','App\Http\Controllers\empsController@index');

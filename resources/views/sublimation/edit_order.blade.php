@@ -84,7 +84,7 @@
                                 </datalist>
                             </div>
 
-                            
+
 
                             <div class="col-md-3 col-6 mt-4">
                                 <label for="inputName" class="control-label">تكرار</label>
@@ -162,7 +162,7 @@
                         </div>
 
                         {{-- 4 --}}
-{{-- 
+{{--
                         <div class="row mb-2">
                             <div class="col-md-6 col-sm-6">
                                 <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
@@ -256,7 +256,7 @@
                                     <td>{{$old_datas->who_signed_order}}</td>
                                     <td>{{$old_datas->designer}}</td>
                                     <td>{{$old_datas->note}}</td>
-                                    <td>                                                
+                                    <td>
                                         <a href="{{ url('viewfile') }}/{{ $old_datas->cust_name }}/{{ $old_datas->images }}" target="_blacnk">
                                         <img src="{{asset('Attachments/'.$old_datas->cust_name.'/'.$old_datas->images)}}"
                                         style="width: 50px; height:50px" alt=""></a>

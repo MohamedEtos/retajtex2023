@@ -81,7 +81,7 @@
                                 </datalist>
                             </div>
 
-                            
+
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">تكرار</label>
@@ -158,7 +158,7 @@
                         </div>
 
                         {{-- 4 --}}
-{{-- 
+{{--
                         <div class="row mb-2">
                             <div class="col-md-6 col-sm-6">
                                 <label for="inputName" class="control-label">قيمة ضريبة القيمة المضافة</label>
@@ -203,9 +203,8 @@
     </div>
 
     </div>
-           {{-- edit history --}}
-
-           <div class="row row-sm">
+        {{-- edit history --}}
+        <div class="row row-sm">
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header pb-2">
@@ -238,7 +237,7 @@
                                             $i++
                                         @endphp
                                     <tr>
-                                        <td class="pr-1">{{$i}}</td>
+                                        <td class="pr-1">{{$sublimationn->id}}</td>
                                         <td class="pr-1">{{$sublimationn->cust_name}}</td>
                                         {{-- <td>{{$sublimationn->copy}}</td> --}}
                                         {{-- <td>{{$sublimationn->fileh}}</td> --}}
@@ -250,7 +249,7 @@
                                         <td class="pr-1">{{$sublimationn->designer}}</td>
                                         <td class="pr-1">{{$sublimationn->note}}</td>
                                         <td class="pr-1">
-                                            
+
                                         {{-- if not fount images  --}}
                                         <?php
                                         if($sublimationn->images == null){
@@ -278,13 +277,13 @@
                                                     <button class="dropdown-item text-danger"
                                                     data-toggle="modal"
                                                     data-order_id="{{$sublimationn->id}}"
-                                                    data-target="#delete_file"> حذف 
+                                                    data-target="#delete_file"> حذف
                                                 </button>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-                                    
+
                                     @endforeach
 
                                 </tbody>
@@ -293,7 +292,7 @@
                     </div>
                 </div>
             </div>
-    
+
         {{-- edit history --}}
     <!-- row closed -->
     </div>

@@ -14,7 +14,7 @@ class SublimationController extends Controller
     {
         $sublimation = sublimation::orderBy('id', 'DESC')->get();
         return view('sublimation.sublimation',compact('sublimation'));
-        
+
 
     }
 
@@ -54,6 +54,7 @@ class SublimationController extends Controller
             $request->pic->move(public_path('Attachments/'.$request->cus_name),$imageName);
 
             $id = sublimation::latest()->first()->id;
+
             $customer_id = $request->id;
 
             sublimation::where('id',$id)->update([
@@ -77,7 +78,7 @@ class SublimationController extends Controller
         $sublimation = sublimation::where('id',$id)->first();
         $cust_name = sublimation::distinct()->select('cust_name')->get();
         $desingers = emps::where('postion','مصمم جرافيك')->get();
-        $old_data = old_order_sublimations::all();
+        $old_data = old_order_sublimations::where('order_id',$id)->get();
 
         return view('sublimation.edit_order',compact('sublimation','desingers','cust_name','old_data'));
     }
@@ -86,11 +87,16 @@ class SublimationController extends Controller
     public function update(Request $request, sublimation $sublimation)
     {
 
-        // to make archie old order 
+        // to make archie old order
        sublimation::find($request->id)
        ->replicate()
        ->setTable('old_order_sublimations')
        ->save();
+
+       $last_id = old_order_sublimations::latest()->first()->id;
+       old_order_sublimations::where('id',$last_id)->update([
+        'order_id'=>$request->id
+       ]);
 
         sublimation::where('id',$request->id)->update([
             'cust_name'=>$request->cus_name,
