@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-الفواتير
+سبلميشن
 @section('css')
 <!-- Internal Data table css -->
 <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -11,6 +11,16 @@
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
 <!--Internal   Notify -->
 <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+
+<style>
+.table thead tr th{
+    padding-right: 0px;
+    font-size:15px
+}
+.table tbody tr td{
+    padding: 1px
+}
+</style>
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -24,68 +34,109 @@
 @endsection
 
 @section('content')
+
+{{-- Notify --}}
+
+@if(Session::has('success'))
+<input type="hidden" name="" id="massege" value="{{Session::get('success')}}">
+<script>
+ window.onload = function not7() {
+   notif({
+        msg: $('#massege').val(),
+        type: "success"
+    });
+}
+</script>
+@endif
+
+{{-- end Notify --}}
+
 				<!-- row opened -->
 				<div class="row row-sm">
 
-					<!--/div-->
-
-                    @if(Session::has('success'))
-                    {{-- <span id="hideMeAfter5Seconds"  class=" mr-2 text-success">{{Session::get('success')}}</span> --}}
-
-                    <script>
-                     window.onload = function not7() {
-                       notif({
-                            msg: "تم حذف الفتاتورة ",
-                            type: "success"
-                        });
-                    }
-                    </script>
-
-
-                    @endif
-					<!--div-->
 					<div class="col-xl-12">
 						<div class="card mg-b-20">
 							<div class="card-header pb-0">
-								<div class="">
-									<a href="sublimation/create" class="btn btn-primary-gradient ">اضافه</a>
-									<a href="invoices/create" class="btn btn-primary-gradient ">اضافه</a>
+								<div class="col-sm-12 col-md-2">
+									<a href="sublimation/create" class="btn btn-primary-gradient col-12">اضافه</a>
 								</div>
 							</div>
 							<div class="card-body">
 								<div class="table-responsive">
-									<table id="example1" class="table key-buttons text-md-nowrap " data-page-length="25">
+									<table id="example1" class="table key-buttons text-md-nowrap padding-0" data-page-length="25">
 										<thead>
 											<tr>
-												<th class="border-bottom-0">م</th>
-												<th class="border-bottom-0">اسم العميل</th>
-												<th class="border-bottom-0">متر</th>
-												<th class="border-bottom-0">قطع</th>
-												<th class="border-bottom-0">ماكينه</th>
-												<th class="border-bottom-0">تاريخ الطباعه</th>
-												<th class="border-bottom-0">القائم بالطباعه</th>
-												<th class="border-bottom-0">المصمم</th>
-												<th class="border-bottom-0">ملاحظات</th>
-												<th class="border-bottom-0">الاجمالي</th>
-												<th class="border-bottom-0">التصميم</th>
-												<th class="border-bottom-0">العمليات</th>
+												<th class="pr-1">م</th>
+												<th class="pr-2">اسم العميل</th>
+												<th class="pr-2">متر</th>
+												<th class="pr-2">قطع</th>
+												<th class="pr-2">ماكينه</th>
+												<th class="pr-2">تاريخ الطباعه</th>
+												<th class="pr-2">القائم بالطباعه</th>
+												<th class="pr-2">المصمم</th>
+												<th class="pr-2">ملاحظات</th>
+												<th class="pr-2">التصميم</th>
+												<th class="pr-2">العمليات</th>
 											</tr>
 										</thead>
 										<tbody>
+                                            @php
+                                                $i=0
+                                            @endphp
+                                            @foreach ($sublimation as $sublimationn)
+                                                @php
+                                                    $i++
+                                                @endphp
 											<tr>
-												<td>1</td>
-												<td>اسامه جميل</td>
-												<td>55</td>
-												<td></td>
-												<td>dgi</td>
-												<td>1\3\2023</td>
-												<td>حبيبة</td>
-												<td>مريم</td>
-												<td></td>
-												<td></td>
-												<td></td>
-												<td></td>
+												<td class="pr-1">{{$i}}</td>
+												<td class="pr-1">{{$sublimationn->cust_name}}</td>
+												{{-- <td>{{$sublimationn->copy}}</td> --}}
+												{{-- <td>{{$sublimationn->fileh}}</td> --}}
+												<td class="pr-1">{{$sublimationn->total_meter}}</td>
+												<td class="pr-1">{{$sublimationn->type_print}}</td>
+												<td class="pr-1">{{$sublimationn->printer}}</td>
+												<td class="pr-1">{{$sublimationn->date}}</td>
+												<td class="pr-1">{{$sublimationn->who_signed_order}}</td>
+												<td class="pr-1">{{$sublimationn->designer}}</td>
+												<td class="pr-1">{{$sublimationn->note}}</td>
+                                                <td class="pr-1">
+                                                    
+                                                {{-- if not fount images  --}}
+                                                <?php
+                                                if($sublimationn->images == null){
+                                                    echo "لا توجد صورة";
+                                                }else{
+                                                ?>
+                                                <a href="{{ url('viewfile') }}/{{ $sublimationn->cust_name }}/{{ $sublimationn->images }}" target="_blacnk">
+                                                    <img src="{{asset('Attachments/'.$sublimationn->cust_name.'/'.$sublimationn->images)}}"
+                                                        style="width: 50px; height:50px" alt=""></a>
+                                                <?php
+                                                }
+                                                ?>
+                                                {{--  end if not fount images  --}}
+
+                                                </td>
+                                                <td>
+													<div class="dropdown">
+														<button aria-expanded="false" aria-haspopup="true" class="btn btn-sm ripple btn-primary"
+														data-toggle="dropdown" id="dropdownMenuButton" type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
+														<div  class="dropdown-menu tx-13">
+															{{-- <a class="dropdown-item" href="">تفاصيل </a> --}}
+
+															<a class="dropdown-item text-info" href="{{url('sublimation/edit_order/'.$sublimationn->id)}}">تعديل </a>
+
+                                                            <button class="dropdown-item text-danger"
+                                                            data-toggle="modal"
+                                                            data-order_id="{{$sublimationn->id}}"
+                                                            data-target="#delete_file"> حذف 
+                                                        </button>
+														</div>
+													</div>
+												</td>
 											</tr>
+                                            
+                                            @endforeach
+
 										</tbody>
 									</table>
 								</div>
@@ -112,15 +163,15 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{url('invoicesDeleted')}}" method="post">
+                <form action="{{url('sublimation/delete')}}" method="post">
 
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <p class="text-center">
-                        <h6 style="color:red"> هل انت متاكد من عملية حذف الفاتورة ؟</h6>
+                        <h6 style="color:red"> هل انت متاكد من عملية الحذف  ؟</h6>
                         </p>
 
-                        <input type="hidden" name="id_inv" id="id_inv" value="">
+                        <input type="hidden" name="order_id" id="order_id" value="">
 
                     </div>
                     <div class="modal-footer">
@@ -217,9 +268,9 @@
 <script>
     $('#delete_file').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
-        var id_inv = button.data('id_inv')
+        var order_id = button.data('order_id')
         var modal = $(this)
-        modal.find('.modal-body #id_inv').val(id_inv);
+        modal.find('.modal-body #order_id').val(order_id);
     })
 </script>
 

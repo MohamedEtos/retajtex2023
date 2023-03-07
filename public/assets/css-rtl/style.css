@@ -6460,7 +6460,7 @@ textarea.form-control.is-invalid, textarea.form-control.parsley-error {
   color: #031b4e; }
   .table th, .table td {
     padding: 0.75rem;
-    vertical-align: top;
+    vertical-align: center;
     border-top: 1px solid #dde2ef; }
   .table thead th {
     vertical-align: bottom; }

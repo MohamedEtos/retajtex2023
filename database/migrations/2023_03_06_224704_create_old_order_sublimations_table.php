@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sublimations', function (Blueprint $table) {
+        Schema::create('old_order_sublimations', function (Blueprint $table) {
             $table->id();
             $table->string('cust_name')->nullable();
             $table->integer('copy')->nullable();
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sublimations');
+        Schema::dropIfExists('old_order_sublimations');
     }
 };

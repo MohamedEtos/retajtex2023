@@ -64,7 +64,10 @@
         <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{url('sublimation/store')}}" method="POST" enctype="multipart/form-data"
+                    <div class="card-header pb-2">
+                        <span class="text-center h4">البيانات الحالية</span>
+                    </div>
+                    <form action="{{url('sublimation/update')}}" method="POST" enctype="multipart/form-data"
                         autocomplete="off">
                         {{ csrf_field() }}
                         {{-- 1 --}}
@@ -72,8 +75,8 @@
                         <div class="row mb-2">
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="cus_name" class="control-label">اسم العميل</label>
-                                {{-- <input type="text" class="form-control" id="cus_name" name="cus_name"> --}}
-                                <input list="brow" name="cus_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                                <input type="hidden" class="form-control" id="id" name="id" value="{{$sublimation->id}}">
+                                <input list="brow" value="{{$sublimation->cust_name}}" name="cus_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                                 <datalist id="brow">
                                     @foreach ($cust_name as $cust_names)
                                     <option value="{{$cust_names->cust_name}}">
@@ -83,21 +86,21 @@
 
                             
 
-                            <div class="col-md-3 col-sm-6 mt-4">
+                            <div class="col-md-3 col-6 mt-4">
                                 <label for="inputName" class="control-label">تكرار</label>
-                                <input type="number" class="form-control" oninput="calcMeter()"   id="copy" name="copy"
+                                <input type="number" value="{{$sublimation->copy}}" class="form-control" oninput="calcMeter()"   id="copy" name="copy"
                                      >
                             </div>
 
-                            <div class="col-md-3 col-sm-6 mt-4">
+                            <div class="col-md-3 col-6 mt-4">
                                 <label for="inputName" class="control-label">طول الملف</label>
-                                <input type="number" oninput="calcMeter()" class="form-control"  id="fileh" name="fileh"
+                                <input type="number" value="{{$sublimation->fileh}}" oninput="calcMeter()" class="form-control"  id="fileh" name="fileh"
                                      >
                             </div>
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">اجمالي الامتار</label>
-                                <input type="number" class="form-control" id="total_meter" name="total_meter"
+                                <input type="number" value="{{$sublimation->total_meter}}" class="form-control" id="total_meter" name="total_meter"
                                    readonly >
                             </div>
 
@@ -107,11 +110,11 @@
 
                         <div class="row mb-2">
 
-                        <div class="col-md-4 col-sm-6 mt-4">
+                        <div class="col-md-4 col-6 mt-4">
                             <label for="printer" class="control-label">ماكينة الطباعة</label>
                             <select name="printer" id="printer" class="form-control" >
                                 <!--placeholder-->
-                                <option value="" selected disabled>حدد ماكينة الطباعه</option>
+                                <option value="{{$sublimation->printer}}" selected >{{$sublimation->printer}}</option>
                                 <option value="Fedar">Fedar</option>
                                 <option value="DGI">DGI</option>
                                 <option value="Sky">SKY</option>
@@ -119,15 +122,15 @@
                         </div>
 
 
-                            <div class="col-md-4 col-sm-6 mt-4">
+                            <div class="col-md-4 col-6 mt-4">
                                 <label for="ptint_type" class="control-label">نوع الطباعه</label>
-                                <input type="text" class="form-control" id="ptint_type" name="ptint_type" placeholder="قطع / اتواب">
+                                <input type="text" value="{{$sublimation->type_print}}" class="form-control" id="ptint_type" name="ptint_type" placeholder="قطع / اتواب">
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label class="control-label ">تاريخ الطباعة</label>
                                 <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
-                                    type="text" value="{{ date('Y-m-d') }}" >
+                                    type="text" value="{{$sublimation->date}}" >
                             </div>
 
                         </div>
@@ -136,21 +139,22 @@
 
                         <div class="row mb-2">
 
-                            <div class="col-md-4 col-sm-6 mt-4">
+                            <div class="col-md-4 col-6 mt-4">
                                 <label for="designer" class="control-label">المصمم</label>
                                 <select name="designer" id="designer" class="form-control" >
+                                    <option selected value="{{$sublimation->designer}}">{{$sublimation->designer}}</option>
                                     @foreach ($desingers as $desinger)
                                         <option value="{{$desinger->name}}">{{$desinger->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <div class="col-md-4 col-sm-6 mt-4">
+                            <div class="col-md-4 col-6 mt-4">
                                 <label for="who_signed_order" class="control-label">القائم بالطباعه</label>
-                                <input type="text" class="form-control form-control-lg" id="who_signed_order" value="{{Auth::User()->name}}" name="who_signed_order" >
+                                <input type="text" class="form-control form-control-lg" id="who_signed_order" value="{{$sublimation->who_signed_order}}" name="who_signed_order" >
                             </div>
 
-                            <div class="col-md-4 col-sm-6 mt-4">
+                            <div class="col-md-4 col-12 mt-4">
                                 <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
                                 <input type="text" readonly class="form-control form-control-lg" id="phone_number"  name="phone_number" >
                             </div>
@@ -175,7 +179,7 @@
                         <div class="row mt-4">
                             <div class="col-sm-12 col-md-8 mt-4">
                                 <label for="note">ملاحظات</label>
-                                <textarea class="form-control" id="note" name="note" rows="5"></textarea>
+                                <textarea class="form-control" id="note" value='{{$desinger->note}}' name="note" rows="5"></textarea>
                             </div>
 
 
@@ -188,7 +192,8 @@
                             </div>
 
                             <div class="col-sm-12 col-md-4 mt-4">
-                                <button type="submit" class="btn btn-outline-primary ">حفظ البيانات</button>
+                                <button type="submit" class="btn btn-primary ">حفظ التعديلات</button>
+                                <a href="/sublimation"  type="submit" class="btn btn-outline-danger col-4 ">إلغاء</a>
                             </div>
                         </div>
                         <br>
@@ -202,108 +207,77 @@
         </div>
     </div>
 
-    </div>
-           {{-- edit history --}}
 
-           <div class="row row-sm">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-header pb-2">
-                        <span class="text-center h4">اخر اوردر مضاف</span>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover mb-0 text-md-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th class="pr-1">م</th>
-                                        <th class="pr-2">اسم العميل</th>
-                                        <th class="pr-2">متر</th>
-                                        <th class="pr-2">قطع</th>
-                                        <th class="pr-2">ماكينه</th>
-                                        <th class="pr-2">تاريخ الطباعه</th>
-                                        <th class="pr-2">القائم بالطباعه</th>
-                                        <th class="pr-2">المصمم</th>
-                                        <th class="pr-2">ملاحظات</th>
-                                        <th class="pr-2">التصميم</th>
-                                        <th class="pr-2">العمليات</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i=0
-                                    @endphp
-                                    @foreach ($sublimation as $sublimationn)
-                                        @php
-                                            $i++
-                                        @endphp
-                                    <tr>
-                                        <td class="pr-1">{{$i}}</td>
-                                        <td class="pr-1">{{$sublimationn->cust_name}}</td>
-                                        {{-- <td>{{$sublimationn->copy}}</td> --}}
-                                        {{-- <td>{{$sublimationn->fileh}}</td> --}}
-                                        <td class="pr-1">{{$sublimationn->total_meter}}</td>
-                                        <td class="pr-1">{{$sublimationn->type_print}}</td>
-                                        <td class="pr-1">{{$sublimationn->printer}}</td>
-                                        <td class="pr-1">{{$sublimationn->date}}</td>
-                                        <td class="pr-1">{{$sublimationn->who_signed_order}}</td>
-                                        <td class="pr-1">{{$sublimationn->designer}}</td>
-                                        <td class="pr-1">{{$sublimationn->note}}</td>
-                                        <td class="pr-1">
-                                            
-                                        {{-- if not fount images  --}}
-                                        <?php
-                                        if($sublimationn->images == null){
-                                            echo "لا توجد صورة";
-                                        }else{
-                                        ?>
-                                        <a href="{{ url('viewfile') }}/{{ $sublimationn->cust_name }}/{{ $sublimationn->images }}" target="_blacnk">
-                                            <img src="{{asset('Attachments/'.$sublimationn->cust_name.'/'.$sublimationn->images)}}"
-                                                style="width: 50px; height:50px" alt=""></a>
-                                        <?php
-                                        }
-                                        ?>
-                                        {{--  end if not fount images  --}}
+</div>
 
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button aria-expanded="false" aria-haspopup="true" class="btn btn-sm ripple btn-primary"
-                                                data-toggle="dropdown" id="dropdownMenuButton" type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
-                                                <div  class="dropdown-menu tx-13">
-                                                    {{-- <a class="dropdown-item" href="">تفاصيل </a> --}}
 
-                                                    <a class="dropdown-item text-info" href="{{url('sublimation/edit_order/'.$sublimationn->id)}}">تعديل </a>
+        <!--/div-->
+            {{-- edit history --}}
 
-                                                    <button class="dropdown-item text-danger"
-                                                    data-toggle="modal"
-                                                    data-order_id="{{$sublimationn->id}}"
-                                                    data-target="#delete_file"> حذف 
-                                                </button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
-                                    @endforeach
+    <div class="row row-sm">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header pb-2">
+                    <span class="text-center h4">سجل تعديلات الاوردر</span>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 text-md-nowrap">
+                            <thead>
+                                <tr>
+                                    <th class="pr-1">م</th>
+                                    <th class="pr-2">متر</th>
+                                    <th class="pr-2">قطع</th>
+                                    <th class="pr-2">ماكينه</th>
+                                    <th class="pr-2">تاريخ الطباعه</th>
+                                    <th class="pr-2">القائم بالطباعه</th>
+                                    <th class="pr-2">المصمم</th>
+                                    <th class="pr-2">ملاحظات</th>
+                                    <th class="pr-2">التصميم</th>
+                                    <th>تاريخ التعديل</th>
 
-                                </tbody>
-                            </table>
-                        </div>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i=0;
+                                @endphp
+
+                                @foreach ($old_data as $old_datas)
+                                @php
+                                    $i++;
+                                @endphp
+                                <tr>
+                                    <th scope="row">{{$i}}</th>
+                                    <td>{{$old_datas->total_meter}}</td>
+                                    <td>{{$old_datas->type_print}}</td>
+                                    <td>{{$old_datas->printer}}</td>
+                                    <td>{{$old_datas->date}}</td>
+                                    <td>{{$old_datas->who_signed_order}}</td>
+                                    <td>{{$old_datas->designer}}</td>
+                                    <td>{{$old_datas->note}}</td>
+                                    <td>                                                
+                                        <a href="{{ url('viewfile') }}/{{ $old_datas->cust_name }}/{{ $old_datas->images }}" target="_blacnk">
+                                        <img src="{{asset('Attachments/'.$old_datas->cust_name.'/'.$old_datas->images)}}"
+                                        style="width: 50px; height:50px" alt=""></a>
+                                    </td>
+                                    <td>{{$old_datas->created_at}}</td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-    
-        {{-- edit history --}}
+        </div>
+
+    {{-- edit history --}}
+    </div>
     <!-- row closed -->
     </div>
     <!-- Container closed -->
     </div>
     <!-- main-content closed -->
-
-
-
-
 @endsection
 @section('js')
     <!-- Internal Select2 js-->
