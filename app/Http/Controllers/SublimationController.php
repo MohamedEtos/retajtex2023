@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\emps;
 use App\Models\old_order_sublimations;
+use App\Models\Operationpermissions;
 use App\Models\sublimation;
 use Illuminate\Http\Request;
 
@@ -30,9 +31,6 @@ class SublimationController extends Controller
 
     public function store(Request $request)
     {
-
-
-
         sublimation::create([
             'cust_name'=>$request->cus_name,
             'copy'=>$request->copy,
@@ -63,6 +61,53 @@ class SublimationController extends Controller
 
         }
         return redirect()->back()->with('success','تم تسجيل الاوردر');
+
+    }
+
+
+
+    public function storeFrompermissions(Request $request)
+    {
+        sublimation::create([
+            'cust_name'=>$request->cust_name,
+            'copy'=>$request->copy,
+            'fileh'=>$request->fileh,
+            'total_meter'=>$request->total_meter,
+            'printer'=>$request->printer,
+            'type_print'=>$request->ptint_type,
+            'date'=>$request->date,
+            'who_signed_order'=>$request->who_signed_order,
+            'designer'=>$request->designer,
+            'phone_number'=>$request->phone_number,
+            'note'=>$request->note,
+        ]);
+
+        if($request->hasFile('pic')){
+
+            $ext = '.'.$request->pic->getClientOriginalExtension();
+            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
+            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
+
+            $id = sublimation::latest()->first()->id;
+
+            $customer_id = $request->id;
+
+            sublimation::where('id',$id)->update([
+                'images' => $imageName,
+            ]);
+
+        }
+        return redirect()->back()->with('success','تم تسجيل الاوردر');
+    }
+
+
+    public function goToAddOrder($id)
+    {
+        $dataFromPermss = Operationpermissions::where('id',$id)->first();
+        $cust_name = sublimation::distinct()->select('cust_name')->get();
+        $desingers = emps::where('postion','مصمم جرافيك')->get();
+        $sublimation = sublimation::limit(3)->orderBy('id', 'DESC')->get();
+        return view('sublimation.add_order_from_permissions',compact('dataFromPermss','cust_name','desingers','sublimation'));
 
     }
 

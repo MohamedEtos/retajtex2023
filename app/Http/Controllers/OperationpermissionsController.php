@@ -53,6 +53,20 @@ class OperationpermissionsController extends Controller
             'pic'=>$request->pic,
         ]);
 
+        if($request->hasFile('pic')){
+
+            $ext = '.'.$request->pic->getClientOriginalExtension();
+            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
+            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
+
+            $id = Operationpermissions::latest()->first()->id;
+
+            Operationpermissions::where('id',$id)->update([
+                'pic' => $imageName,
+            ]);
+
+        }
+        
         return redirect()->back()->with('success','تم اضافه اذن التشغيل');
     }
 
@@ -75,9 +89,11 @@ class OperationpermissionsController extends Controller
      * @param  \App\Models\Operationpermissions  $operationpermissions
      * @return \Illuminate\Http\Response
      */
-    public function edit(Operationpermissions $operationpermissions)
+    public function edit($id)
     {
-        //
+        $cust_name = sublimation::distinct()->select('cust_name')->get();
+        $edit = Operationpermissions::where('id',$id)->first();
+        return view('Operationpermissions.editOperation',compact('edit','cust_name'));
     }
 
     /**
@@ -98,8 +114,10 @@ class OperationpermissionsController extends Controller
      * @param  \App\Models\Operationpermissions  $operationpermissions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Operationpermissions $operationpermissions)
+    public function destroy(Request $request)
     {
-        //
+        // return $request;
+        Operationpermissions::where('id',$request->id)->delete();
+        return redirect()->back()->with('success','تم الحذف');  
     }
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('path');
             $table->longText('note');
             $table->longText('pic');
+            $table->integer('order_status');    
             $table->softDeletes();
             $table->timestamps();
         });

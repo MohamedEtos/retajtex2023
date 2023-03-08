@@ -42,6 +42,11 @@ Route::post('sublimation/update','App\Http\Controllers\sublimationController@upd
 Route::get('Operationpermissions','App\Http\Controllers\OperationpermissionsController@index');
 Route::get('Operationpermissions/addOperation/{printer}','App\Http\Controllers\OperationpermissionsController@show');
 Route::post('Operationpermissions/addOperation/store','App\Http\Controllers\OperationpermissionsController@store');
+Route::get('Operationpermissions/print/{id}','App\Http\Controllers\OperationpermissionsController@moveDataToPrint');
+Route::get('Operationpermissions/edit/{id}','App\Http\Controllers\OperationpermissionsController@edit');
+Route::post('Operationpermissions/destroy','App\Http\Controllers\OperationpermissionsController@destroy');
+Route::get('Operationpermissions/print/{id}','App\Http\Controllers\sublimationController@goToAddOrder');
+Route::post('Operationpermissions/storeFrompermissions','App\Http\Controllers\sublimationController@storeFrompermissions');
 
 
 Route::get('emps','App\Http\Controllers\empsController@index');

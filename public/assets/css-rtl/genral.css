@@ -11,3 +11,20 @@
     }
   } 
 
+  .small-font thead tr th,
+  .small-font tbody tr td{ 
+    font-size: 9px;
+  }
+
+  .small-font-btn{
+    font-size: 9px;
+  }
+
+  .printer_img_postiom{
+    left: 13px;
+    top: 13px;
+  }
+
+  .selected_tr {
+    background-color: rgba(0, 204, 255, 0.556);
+  }

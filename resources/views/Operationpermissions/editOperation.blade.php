@@ -15,7 +15,7 @@
 <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 @endsection
 @section('title')
-    اضافة فاتورة
+تعديل اذن التشغيل
 @stop
 
 @section('page-header')
@@ -23,7 +23,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto"><a href="#">المصممين</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ <a href="{{ url('Operationpermissions') }}">اذونات التشغيل</a> / اضافه</span>
+                <h4 class="content-title mb-0 my-auto"><a href="#">المصممين</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ <a href="{{ url('Operationpermissions') }}">اذونات التشغيل</a> / تعديل </span>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
                     <div class="row mb-2">
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="cus_name" class="control-label">اسم العميل</label>
-                            <input list="brow" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                            <input list="brow" name="cust_name" value="{{$edit->cust_name}}" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                             <datalist id="brow">
                                 @foreach ($cust_name as $cust_names)
                                 <option value="{{$cust_names->cust_name}}">
@@ -79,14 +79,13 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="ptint_type" class="control-label">عدد القطع او نوع الطباعه</label>
-                            <input type="text" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
+                            <input type="text" value="{{$edit->ptint_type}}" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
                         </div>
 
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="inputName" class="control-label">الامتار المطلوبه </label>
-                            <input type="number" class="form-control" id="total_meter" name="total_meter"
-                                >
+                            <input type="number" value="{{$edit->total_meter}}" class="form-control" id="total_meter" name="total_meter">
                         </div>
 
                     </div>
@@ -100,7 +99,7 @@
                                 <label for="printer" class="control-label">ماكينة الطباعة</label>
                                 <select name="printer" id="printer" class="form-control" >
                                     <!--placeholder-->
-                                    <option value="{{$printer_name}}" selected>{{$printer_name}}</option>
+                                    <option value="{{$edit->printer}}" selected>{{$edit->printer}}</option>
                                     <option value="Fedar">Fedar</option>
                                     <option value="DGI">DGI</option>
                                     <option value="Sky">SKY</option>
@@ -110,12 +109,12 @@
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label class="control-label ">تاريخ تاكيد الاوردر</label>
                                 <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
-                                    type="text" value="{{ date('Y-m-d') }}" >
+                                    type="text" value="{{$edit->date}}" >
                             </div>
     
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="designer" class="control-label">المصمم</label>
-                                <input type="text" class="form-control form-control-lg" id="designer" value="{{Auth::User()->name}}" name="designer" >
+                                <input type="text" class="form-control form-control-lg" id="designer" value="{{$edit->designer}}" name="designer" >
                             </div>
 
                     </div>
@@ -126,12 +125,12 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
-                            <input type="text" class="form-control form-control-lg" id="phone_number"  name="phone_number" >
+                            <input type="text" value="{{$edit->phone_number}}" class="form-control form-control-lg" id="phone_number"  name="phone_number" >
                         </div>
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="path"  class="control-label">مكان الملف</label>
-                            <input type="text" class="form-control form-control-lg" id="path"  name="path" >
+                            <input type="text" class="form-control form-control-lg" id="path" value="{{$edit->path}}"  name="path" >
                         </div>
 
                     </div>
@@ -144,7 +143,7 @@
                     <div class="row mt-4">
                         <div class="col-sm-12 col-md-8 mt-4">
                             <label for="note">ملاحظات</label>
-                            <textarea class="form-control" id="note" name="note" rows="5"></textarea>
+                            <textarea class="form-control" id="note" value="{{$edit->note}}" name="note" rows="5"></textarea>
                         </div>
 
 
@@ -158,8 +157,7 @@
 
                         <div class="col-sm-12 col-md-4 mt-4">
                             <button type="submit" class="btn btn-primary ">حفظ البيانات</button>
-                            <a href="{{url('Operationpermissions')}}" class="btn btn-outline-warning ">رجوع  <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                            </a>
+                            <a  class="btn btn-outline-danger" href="{{url('Operationpermissions')}}">الغاء</a>
                         </div>
                     </div>
                     <br>
