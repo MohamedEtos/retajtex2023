@@ -23,8 +23,7 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto"><a href="#">المصممين</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/
-                     اذونات التشغيل</span>
+                <h4 class="content-title mb-0 my-auto"><a href="#">المصممين</a></h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ <a href="{{ url('Operationpermissions') }}">اذونات التشغيل</a> / اضافه</span>
             </div>
         </div>
     </div>
@@ -57,182 +56,121 @@
    </script>
 @endif
 
-<h4 class="text-center">توزيع الشغل علي المكن </h4>
 
-<br>
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <form action="{{url('Operationpermissions/addOperation/store')}}" method="POST" enctype="multipart/form-data"
+                    autocomplete="off">
+                    {{ csrf_field() }}
+                    {{-- 1 --}}
 
-{{-- printers rows --}}
-<div class="row row-sm">
+                    <div class="row mb-2">
+                        <div class="col-md-4 col-sm-6 mt-4">
+                            <label for="cus_name" class="control-label">اسم العميل</label>
+                            <input list="brow" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                            <datalist id="brow">
+                                @foreach ($cust_name as $cust_names)
+                                <option value="{{$cust_names->cust_name}}">
+                                @endforeach
+                            </datalist>
+                        </div>
 
-
-
-{{-- fedar  --}}
-<div class="col-xl-4">
-<div class="card">
-    <div class="card-header text-center pb-2">
-                <a href="{{url('Operationpermissions/addOperation/Fedar')}}" type="button" class="text-center h4" data-toggle="tooltip" data-placement="top" title="اضافه اوردر فيدار">
-            فيدار
-        </a>
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-hover mb-0 text-md-nowrap">
-                <thead>
-                    <tr>
-                        <th class="pr-1">م</th>
-                        <th class="pr-2">اسم العميل</th>
-                        <th class="pr-2">امتار</th>
-                        <th class="pr-2">قطع</th>
-                        <th class="pr-2">تاريخ الاوردر</th>
-                        <th class="pr-2">المصمم</th>
-                        <th class="pr-2">صورة</th>
-                        <th class="pr-2">تفاصيل</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $i=0;
-                    @endphp
-                    @foreach ($fedar as $fedarp)
-                        @php
-                            $i++;
-                        @endphp
-                    <tr>
-                        <td>{{$i}}</td>
-                        <td>{{$fedarp->cust_name}}</td>
-                        <td>{{$fedarp->total_meter}}</td>
-                        <td>{{$fedarp->ptint_type}}</td>
-                        <td>{{$fedarp->date}}</td>
-                        <td>{{$fedarp->designer}}</td>
-                        <td>صورة</td>
-                        <td><button>btn</button></td>
-                    </tr>
+                        <div class="col-md-4 col-sm-6 mt-4">
+                            <label for="ptint_type" class="control-label">عدد القطع او نوع الطباعه</label>
+                            <input type="text" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
+                        </div>
 
 
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</div>
-{{-- fedar  --}}
+                        <div class="col-md-4 col-sm-6 mt-4">
+                            <label for="inputName" class="control-label">الامتار المطلوبه </label>
+                            <input type="number" class="form-control" id="total_meter" name="total_meter"
+                                >
+                        </div>
+
+                    </div>
+
+                    {{-- 2 --}}
+
+                    <div class="row mb-2">
 
 
-{{-- DGI  --}}
-<div class="col-xl-4">
-    <div class="card">
-        <div class="card-header text-center pb-2">
-            <a href="{{url('Operationpermissions/addOperation/dgi')}}" type="button" class="text-center h4" data-toggle="tooltip" data-placement="top" title="اضافه اوردر دي جي اي">
-        دي جي اي
-    </a>
-</div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover mb-0 text-md-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="pr-1">م</th>
-                            <th class="pr-2">اسم العميل</th>
-                            <th class="pr-2">امتار</th>
-                            <th class="pr-2">قطع</th>
-                            <th class="pr-2">تاريخ الاوردر</th>
-                            <th class="pr-2">المصمم</th>
-                            <th class="pr-2">صورة</th>
-                            <th class="pr-2">تفاصيل</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $i=0;
-                        @endphp
-                        @foreach ($dgi as $dgip)
-                            @php
-                                $i++;
-                            @endphp
-                        <tr>
-                            <td>{{$i}}</td>
-                            <td>{{$dgip->cust_name}}</td>
-                            <td>{{$dgip->total_meter}}</td>
-                            <td>{{$dgip->ptint_type}}</td>
-                            <td>{{$dgip->date}}</td>
-                            <td>{{$dgip->designer}}</td>
-                            <td>صورة</td>
-                            <td><button>btn</button></td>
-                        </tr>
+                            <div class="col-md-4 col-sm-6 mt-4">
+                                <label for="printer" class="control-label">ماكينة الطباعة</label>
+                                <select name="printer" id="printer" class="form-control" >
+                                    <!--placeholder-->
+                                    <option value="{{$printer_name}}" selected>{{$printer_name}}</option>
+                                    <option value="Fedar">Fedar</option>
+                                    <option value="DGI">DGI</option>
+                                    <option value="Sky">SKY</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 col-sm-6 mt-4">
+                                <label class="control-label ">تاريخ تاكيد الاوردر</label>
+                                <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
+                                    type="text" value="{{ date('Y-m-d') }}" >
+                            </div>
     
-    
-                        @endforeach
-                    </tbody>
-                </table>
+                            <div class="col-md-4 col-sm-6 mt-4">
+                                <label for="designer" class="control-label">المصمم</label>
+                                <input type="text" class="form-control form-control-lg" id="designer" value="{{Auth::User()->name}}" name="designer" >
+                            </div>
+
+                    </div>
+
+                    {{-- 3 --}}
+
+                    <div class="row mb-2">
+
+                        <div class="col-md-4 col-sm-6 mt-4">
+                            <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
+                            <input type="text" class="form-control form-control-lg" id="phone_number"  name="phone_number" >
+                        </div>
+
+                        <div class="col-md-4 col-sm-6 mt-4">
+                            <label for="path"  class="control-label">مكان الملف</label>
+                            <input type="text" class="form-control form-control-lg" id="path"  name="path" >
+                        </div>
+
+                    </div>
+
+                    {{-- 4 --}}
+
+
+                    {{-- 5 --}}
+
+                    <div class="row mt-4">
+                        <div class="col-sm-12 col-md-8 mt-4">
+                            <label for="note">ملاحظات</label>
+                            <textarea class="form-control" id="note" name="note" rows="5"></textarea>
+                        </div>
+
+
+
+                        <div class="col-sm-12 col-md-4 mt-4">
+                            <label for="">صورة التصميم</label>
+                            <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
+                            <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                                data-height="107" />
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 mt-4">
+                            <button type="submit" class="btn btn-outline-primary ">حفظ البيانات</button>
+                        </div>
+                    </div>
+                    <br>
+                </form>
             </div>
         </div>
     </div>
-    </div>
-    {{-- DGI  --}}
-
-
-
-
-
-
-    {{-- sky  --}}
-<div class="col-xl-4">
-    <div class="card">
-        <div class="card-header text-center pb-2">
-            <a href="{{url('Operationpermissions/addOperation/sky')}}" type="button" class="text-center h4" data-toggle="tooltip" data-placement="top" title="اضافه اوردر سكاي">
-        سكاي
-    </a>
 </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover mb-0 text-md-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="pr-1">م</th>
-                            <th class="pr-2">اسم العميل</th>
-                            <th class="pr-2">امتار</th>
-                            <th class="pr-2">قطع</th>
-                            <th class="pr-2">تاريخ الاوردر</th>
-                            <th class="pr-2">المصمم</th>
-                            <th class="pr-2">صورة</th>
-                            <th class="pr-2">تفاصيل</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $i=0;
-                        @endphp
-                        @foreach ($sky as $skyp)
-                            @php
-                                $i++;
-                            @endphp
-                        <tr>
-                            <td>{{$i}}</td>
-                            <td>{{$skyp->cust_name}}</td>
-                            <td>{{$skyp->total_meter}}</td>
-                            <td>{{$skyp->ptint_type}}</td>
-                            <td>{{$skyp->date}}</td>
-                            <td>{{$skyp->designer}}</td>
-                            <td>صورة</td>
-                            <td><button>btn</button></td>
-                        </tr>
-    
-    
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    </div>
-    {{-- sky  --}}
+<!-- row closed -->
+
 
 </div>
 </div>
-</div>
-{{-- printers rows --}}
-
 
 @endsection
 @section('js')

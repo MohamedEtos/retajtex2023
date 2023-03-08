@@ -270,9 +270,9 @@
                 </div>
             </div>
         </div>
-
-    {{-- edit history --}}
     </div>
+    {{-- edit history --}}
+    
     <!-- row closed -->
     </div>
     <!-- Container closed -->

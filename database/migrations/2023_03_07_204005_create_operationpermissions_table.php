@@ -15,6 +15,17 @@ return new class extends Migration
     {
         Schema::create('operationpermissions', function (Blueprint $table) {
             $table->id();
+            $table->string('cust_name');
+            $table->string('ptint_type');
+            $table->integer('total_meter');
+            $table->string('printer');
+            $table->date('date');
+            $table->string('designer');
+            $table->string('phone_number');
+            $table->string('path');
+            $table->longText('note');
+            $table->longText('pic');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

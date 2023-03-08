@@ -15,8 +15,11 @@ class OperationpermissionsController extends Controller
      */
     public function index()
     {
+        $fedar = Operationpermissions::where('printer','Fedar')->get();
+        $sky = Operationpermissions::where('printer','sky')->get();
+        $dgi = Operationpermissions::where('printer','dgi')->get();
         $cust_name = sublimation::distinct()->select('cust_name')->get();
-        return view('Operationpermissions.Operationpermissions',compact('cust_name'));
+        return view('Operationpermissions.Operationpermissions',compact('cust_name','fedar','sky','dgi'));
     }
 
     /**
@@ -37,7 +40,20 @@ class OperationpermissionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Operationpermissions::create([
+            'cust_name'=>$request->cust_name,
+            'ptint_type'=>$request->ptint_type,
+            'total_meter'=>$request->total_meter,
+            'printer'=>$request->printer,
+            'date'=>$request->date,
+            'designer'=>$request->designer,
+            'phone_number'=>$request->phone_number,
+            'path'=>$request->path,
+            'note'=>$request->note,
+            'pic'=>$request->pic,
+        ]);
+
+        return redirect()->back()->with('success','تم اضافه اذن التشغيل');
     }
 
     /**
@@ -46,9 +62,11 @@ class OperationpermissionsController extends Controller
      * @param  \App\Models\Operationpermissions  $operationpermissions
      * @return \Illuminate\Http\Response
      */
-    public function show(Operationpermissions $operationpermissions)
+    public function show($printer)
     {
-        //
+        $cust_name = sublimation::distinct()->select('cust_name')->get();
+        $printer_name = $printer; 
+        return view('Operationpermissions.addOperation',compact('cust_name','printer_name'));
     }
 
     /**

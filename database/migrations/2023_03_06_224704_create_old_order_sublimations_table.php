@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('old_order_sublimations', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('order_id')->nullable();
             $table->string('cust_name')->nullable();
             $table->integer('copy')->nullable();
             $table->integer('fileh')->nullable();
