@@ -88,7 +88,7 @@
                         <th class="pr-2">تاريخ الاوردر</th>
                         <th class="pr-2">المصمم</th>
                         <th class="pr-2">صورة</th>
-                        <th class="pr-2">تفاصيل</th>
+                        <th class="pr-2">عمليات</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -111,16 +111,17 @@
                             <a href="{{ url('viewfile') }}/{{ $fedarp->cust_name }}/{{ $fedarp->pic }}" target="_blacnk">
                             <img src="{{asset('Attachments/'.$fedarp->cust_name.'/'.$fedarp->pic)}}"
                             style="width: 50px; height:50px" alt=""></a>                        
-                        <td>
+                        </td>
                         
+                        <td>
                             <div class="dropdown">
                                 <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info btn-sm p-1 m-1 small-font-btn"
                                 data-toggle="dropdown" type="button">خيارات<i class="fas fa-caret-down ml-1"></i></button>
                                 <div class="dropdown-menu tx-13">
-                                    <a class="dropdown-item  text-success small-font-btn  p-1 m-1"href="{{url('Operationpermissions/print/'.$fedarp->id)}}">
+                                    <a class="dropdown-item   text-success small-font-btn  p-1 m-1"<?php if(!$fedarp->order_status == 1) {echo 'href';}?> ="{{url('Operationpermissions/print/'.$fedarp->id)}}">
                                         @php
                                             if($fedarp->order_status == 1){
-                                                echo 'يطبع الان';
+                                                echo 'جاري الطباعه';
                                             }else {
                                                 echo 'بدء الطباعه';
                                             }
@@ -176,7 +177,7 @@
                             <th class="pr-2">تاريخ الاوردر</th>
                             <th class="pr-2">المصمم</th>
                             <th class="pr-2">صورة</th>
-                            <th class="pr-2">تفاصيل</th>
+                            <th class="pr-2">عمليات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -198,17 +199,17 @@
                                 <a href="{{ url('viewfile') }}/{{ $dgip->cust_name }}/{{ $dgip->pic }}" target="_blacnk">
                                 <img src="{{asset('Attachments/'.$dgip->cust_name.'/'.$dgip->pic)}}"
                                 style="width: 50px; height:50px" alt=""></a>                        
-                            <td>
+                                </td>
                             <td>
                             
                                 <div class="dropdown">
                                     <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info btn-sm p-1 m-1 small-font-btn"
                                     data-toggle="dropdown" type="button">خيارات<i class="fas fa-caret-down ml-1"></i></button>
                                     <div class="dropdown-menu tx-13">
-                                        <a class="dropdown-item  text-success small-font-btn  p-1 m-1"href="{{url('Operationpermissions/print/'.$dgip->id)}}">
-                                            @php
+                                        <a class="dropdown-item   text-success small-font-btn  p-1 m-1"<?php if(!$dgip->order_status == 1) {echo 'href';}?> ="{{url('Operationpermissions/print/'.$dgip->id)}}">
+                                                @php
                                                 if($dgip->order_status == 1){
-                                                    echo 'يطبع الان';
+                                                    echo 'جاري الطباعه';
                                                 }else {
                                                     echo 'بدء الطباعه';
                                                 }
@@ -268,7 +269,7 @@
                             <th class="pr-2">تاريخ الاوردر</th>
                             <th class="pr-2">المصمم</th>
                             <th class="pr-2">صورة</th>
-                            <th class="pr-2">تفاصيل</th>
+                            <th class="pr-2">عمليات</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -289,18 +290,18 @@
                             <td>
                                 <a href="{{ url('viewfile') }}/{{ $skyp->cust_name }}/{{ $skyp->pic }}" target="_blacnk">
                                     <img src="{{asset('Attachments/'.$skyp->cust_name.'/'.$skyp->pic)}}"
-                                    style="width: 50px; height:50px" alt=""></a>                     
+                                    style="width: 50px; height:50px" alt="">
+                                </a>                     
+                            </td>
                             <td>
-                            <td>
-                            
                                 <div class="dropdown">
                                     <button aria-expanded="false" aria-haspopup="true" class="btn ripple btn-info btn-sm p-1 m-1 small-font-btn"
                                     data-toggle="dropdown" type="button">خيارات<i class="fas fa-caret-down ml-1"></i></button>
                                     <div class="dropdown-menu tx-13">
-                                        <a class="dropdown-item  text-success small-font-btn  p-1 m-1"href="{{url('Operationpermissions/print/'.$skyp->id)}}">
+                                        <a class="dropdown-item   text-success small-font-btn  p-1 m-1"<?php if(!$skyp->order_status == 1) {echo 'href';}?> ="{{url('Operationpermissions/print/'.$skyp->id)}}">
                                             @php
                                                 if($skyp->order_status == 1){
-                                                    echo 'يطبع الان';
+                                                    echo 'جاري الطباعه';
                                                 }else {
                                                     echo 'بدء الطباعه';
                                                 }
@@ -319,12 +320,8 @@
                                         data-target="#delete_file"> حذف 
                                         </button>                             
                                 </div>
-
                             </td>
-
                         </tr>
-    
-    
                         @endforeach
                     </tbody>
                 </table>

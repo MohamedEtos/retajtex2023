@@ -61,11 +61,11 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{url('Operationpermissions/addOperation/store')}}" method="POST" enctype="multipart/form-data"
+                <form action="{{url('Operationpermissions/update')}}" method="POST" enctype="multipart/form-data"
                     autocomplete="off">
                     {{ csrf_field() }}
                     {{-- 1 --}}
-
+                    <input type="hidden" name="id" value="{{$edit->id}}">
                     <div class="row mb-2">
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="cus_name" class="control-label">اسم العميل</label>
@@ -149,8 +149,7 @@
 
 
                         <div class="col-sm-12 col-md-4 mt-4">
-                            <label for="">صورة التصميم</label>
-                            <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
+                            <label for="">ضع الصورة الجديده اذا اردت تغيرها</label>
                             <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
                                 data-height="107" />
                         </div>

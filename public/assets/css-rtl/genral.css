@@ -28,3 +28,43 @@
   .selected_tr {
     background-color: rgba(0, 204, 255, 0.556);
   }
+
+  .awards{
+    position: relative;
+    
+  }
+
+  .awards .st{
+    bottom: 0;
+    height: 80px;
+    background-color: gold;
+    color: #fff;
+    position: absolute;
+    bottom: 0px;
+    left: 80px;
+    
+  }
+  .awards .sec{
+    height: 60px;
+    background-color: silver;
+    color: #fff;
+    position: absolute;
+    bottom: 0px;
+    left: 30px;
+  }
+  .awards .tre{
+    height: 35px;
+    background-color: #CD7F32;
+    color: #fff;
+    position: absolute;
+    bottom: 0px;
+    left: 130px;
+  }
+  .awards .st_num{
+    color: #fff;
+    position: absolute;
+    z-index: 5;
+    bottom: -10px;
+    left: 130px;
+  }
+

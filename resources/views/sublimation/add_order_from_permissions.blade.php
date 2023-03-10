@@ -68,7 +68,7 @@
                         autocomplete="on">
                         {{ csrf_field() }}
                         {{-- 1 --}}
-
+                    <input type="hidden" value="{{$Operation_id}}" name="Operation_id">
                         <div class="row mb-2">
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="cus_name" class="control-label">اسم العميل</label>
@@ -198,6 +198,7 @@
                             <div class="col-sm-12 col-md-4 mt-4">
                                 <label for="note">صورة التصميم</label>
                                 <div class="col-12">
+                                    <input type="hidden" name="view_img" value="{{$dataFromPermss->pic}}">
                                     <a href="{{ url('viewfile') }}/{{ $dataFromPermss->cust_name }}/{{ $dataFromPermss->pic }}" target="_blacnk">
                                     <img src="{{asset('Attachments/'.$dataFromPermss->cust_name.'/'.$dataFromPermss->pic)}}"alt=""
                                     style="max-height: 200x">

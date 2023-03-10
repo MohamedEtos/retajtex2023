@@ -80,6 +80,7 @@ class SublimationController extends Controller
             'designer'=>$request->designer,
             'phone_number'=>$request->phone_number,
             'note'=>$request->note,
+            'images'=>$request->view_img,
         ]);
 
         if($request->hasFile('pic')){
@@ -88,16 +89,17 @@ class SublimationController extends Controller
             $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
             $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
 
-            $id = sublimation::latest()->first()->id;
-
-            $customer_id = $request->id;
-
-            sublimation::where('id',$id)->update([
+            sublimation::where('id',$request->id)->update([
                 'images' => $imageName,
             ]);
 
         }
-        return redirect()->back()->with('success','تم تسجيل الاوردر');
+
+        Operationpermissions::where('id',$request->Operation_id)->update([
+            'order_status'=>'1'
+        ]);
+
+        return redirect('/Operationpermissions')->with('success','تم تسجيل الاوردر');
     }
 
 
@@ -107,7 +109,8 @@ class SublimationController extends Controller
         $cust_name = sublimation::distinct()->select('cust_name')->get();
         $desingers = emps::where('postion','مصمم جرافيك')->get();
         $sublimation = sublimation::limit(3)->orderBy('id', 'DESC')->get();
-        return view('sublimation.add_order_from_permissions',compact('dataFromPermss','cust_name','desingers','sublimation'));
+        $Operation_id = $id;
+        return view('sublimation.add_order_from_permissions',compact('dataFromPermss','cust_name','desingers','sublimation','Operation_id'));
 
     }
 

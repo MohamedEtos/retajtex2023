@@ -44,6 +44,7 @@ Route::get('Operationpermissions/addOperation/{printer}','App\Http\Controllers\O
 Route::post('Operationpermissions/addOperation/store','App\Http\Controllers\OperationpermissionsController@store');
 Route::get('Operationpermissions/print/{id}','App\Http\Controllers\OperationpermissionsController@moveDataToPrint');
 Route::get('Operationpermissions/edit/{id}','App\Http\Controllers\OperationpermissionsController@edit');
+Route::post('Operationpermissions/update','App\Http\Controllers\OperationpermissionsController@update');
 Route::post('Operationpermissions/destroy','App\Http\Controllers\OperationpermissionsController@destroy');
 Route::get('Operationpermissions/print/{id}','App\Http\Controllers\sublimationController@goToAddOrder');
 Route::post('Operationpermissions/storeFrompermissions','App\Http\Controllers\sublimationController@storeFrompermissions');

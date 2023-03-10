@@ -103,9 +103,34 @@ class OperationpermissionsController extends Controller
      * @param  \App\Models\Operationpermissions  $operationpermissions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Operationpermissions $operationpermissions)
+    public function update(Request $request)
     {
-        //
+        Operationpermissions::where('id',$request->id)->update([
+            'cust_name'=>$request->cust_name,
+            'ptint_type'=>$request->ptint_type,
+            'total_meter'=>$request->total_meter,
+            'printer'=>$request->printer,
+            'date'=>$request->date,
+            'designer'=>$request->designer,
+            'phone_number'=>$request->phone_number,
+            'path'=>$request->path,
+            'note'=>$request->note,
+        ]);
+
+        if($request->hasFile('pic')){
+
+            $ext = '.'.$request->pic->getClientOriginalExtension();
+            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
+            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
+
+
+            Operationpermissions::where('id',$request->id)->update([
+                'pic' => $imageName,
+            ]);
+
+        }
+        
+        return redirect('/Operationpermissions')->with('success','تم تعديل اذن التشغيل');
     }
 
     /**
