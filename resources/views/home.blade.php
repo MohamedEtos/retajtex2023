@@ -49,7 +49,7 @@
 									</div>
 									<div class="mr-auto">
 										<h5 class="tx-13 tx-white-8 mb-3">العملاء</h5>
-										<h2 class="counter mb-0 text-white">2000</h2>
+										<h2 class="counter mb-0 text-white text-left">{{$cust_counter}}</h2>
 									</div>
 								</div>
 							</div>
@@ -63,8 +63,8 @@
 										<i class="icon icon-rocket"></i>
 									</div>
 									<div class="mr-auto">
-										<h5 class="tx-13 tx-white-8 mb-3">Total Sales</h5>
-										<h2 class="counter mb-0 text-white">1765</h2>
+										<h5 class="tx-13 tx-white-8 mb-3">اجمالي الامتار المطبوعه</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$total_printed}}</h2>
 									</div>
 								</div>
 							</div>
@@ -78,8 +78,8 @@
 										<i class="icon icon-docs"></i>
 									</div>
 									<div class="mr-auto">
-										<h5 class="tx-13 tx-white-8 mb-3">Total Projects</h5>
-										<h2 class="counter mb-0 text-white">846</h2>
+										<h5 class="tx-13 tx-white-8 mb-3">الامتار اليومية</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$printed_today}}</h2>
 									</div>
 								</div>
 							</div>
@@ -93,8 +93,8 @@
 										<i class="icon icon-emotsmile"></i>
 									</div>
 									<div class="mr-auto">
-										<h5 class="tx-13 tx-white-8 mb-3">Happy Customers</h5>
-										<h2 class="counter mb-0 text-white">7253</h2>
+										<h5 class="tx-13 tx-white-8 mb-3">اذونات التشغيل المتاحه</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$permossionPrinted}}</h2>
 									</div>
 								</div>
 							</div>
@@ -102,6 +102,7 @@
 					</div>
 				</div>
 				<!-- row closed -->
+
 
 				<!-- row -->
 				<div class="row">
@@ -111,42 +112,69 @@
                             <div class="card-body">
                                 <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                     <!-- Carousel items -->
-                                    <div class="carousel-inner">
+                                    <div class="carousel-inner carousel_height carousel_height">
                                         <div class="carousel-item active flex-column">
-                                            <i class="fa fa-trophy tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">المصممين</p>
+                                            {{-- <i class="fa fa-trophy tx-30 text-white mb-2"></i> --}}
+                                            <p class="text-white mt-2 h4">المصممين</p>
+												<div class="card-body">
+													<div class="row text-light">
+														<div class="col text-center">
+															<label class="tx-12">محمد محروس</label>
+															<p class="font-weight-bold tx-20">{{$mohamed_meter}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">مريم محمد</label>
+															<p class="font-weight-bold tx-20">{{$mariam_meter}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">ايه ايمن</label>
+															<p class="font-weight-bold tx-20">{{$aya_meter}}</p>
+														</div><!-- col -->
+													</div><!-- row -->
 
-
-											<div>1</div>
-											<div>1</div>
-											<div>1</div>
-
-											<div class="awards text-center row">
-												<div class="sec col-1 m-1 ">2</div>
-												<span class="sec_num">1260</span>
-												<div class="st col-1 m-1">1</div>
-												<span class="st_num">1260</span>
-												<div class="tre col-1 m-1">3</div>
-												<span class="tre_num">1260</span>
-											</div>
+												</div>
 	
 
                                         </div>
-                                        <div class="carousel-item flex-column">
-                                            <i class="si si-social-google tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">24th July</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">60% Off</span><br> on buy</h3>
-                                            <div class="text-white m-t-20">
-                                                <i>- Joseph	Vaughan</i>
-                                            </div>
+                                        <div class="carousel-item flex-column carousel_height ">
+                                            <p class="text-white mt-2 h4">العملاء لكل مصمم</p>
+												<div class="card-body">
+													<div class="row text-light">
+														<div class="col text-center">
+															<label class="tx-12"> محروس</label>
+															<p class="font-weight-bold tx-20">{{$mohamed_cust}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">مريم محمد</label>
+															<p class="font-weight-bold tx-20">{{$mariam_cust}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">ايه ايمن</label>
+															<p class="font-weight-bold tx-20">{{$aya_cust}}</p>
+														</div><!-- col -->
+													</div><!-- row -->
+
+												</div>
                                         </div>
-                                        <div class="carousel-item flex-column">
-                                           <i class="si si-social-twitter tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">9th Aug</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">90% Off</span><br> on buy</h3>
-                                            <div class="text-white m-t-20">
-                                                <i>- Alan	Hemmings</i>
-                                            </div>
+                                        <div class="carousel-item flex-column carousel_height">
+                                            <p class="text-white mt-2 h4">التصميمات</p>
+												<div class="card-body">
+													<div class="row text-light">
+														<div class="col text-center">
+															<label class="tx-12">محمد محروس</label>
+															<p class="font-weight-bold tx-20">{{$mohamed_des}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">مريم محمد</label>
+															<p class="font-weight-bold tx-20">{{$mariam_des}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">ايه ايمن</label>
+															<p class="font-weight-bold tx-20">{{$aya_des}}</p>
+														</div><!-- col -->
+													</div><!-- row -->
+
+												</div>
                                         </div>
                                     </div>
                                 </div>
@@ -160,28 +188,72 @@
                                 <div id="myCarousel0" class="carousel slide" data-ride="carousel">
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active flex-column">
-                                            <i class="si si-social-facebook tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">11th June</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">30% Off</span><br>on buy</h3>
-                                            <div class="text-white m-t-20">
-                                                <i>- Alan Hemmings</i>
-                                            </div>
+                                        <div class="carousel-item active flex-column carousel_height">
+											<div class="row">
+												<div class="col-8">
+													<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
+												</div>
+												<div class="col-4 text-left">
+													<img class="col-12" src="{{asset('assets/img/printers/fedar.png')}}" alt="">
+												</div>
+											</div>
+
+											@foreach ($fedar_order as $fedar_orders)
+												
+
+											<div class="row text-light mt-2">
+												<div class="col-4">{{$fedar_orders->cust_name}}</div>
+												<div class="col-4">{{$fedar_orders->total_meter}} <span>م</span></div>
+												<div class="col-4">{{{$fedar_orders->designer}}}</div>
+											</div>
+
+											@endforeach
+
                                         </div>
-                                        <div class="carousel-item flex-column">
-                                           <i class="si si-social-google tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">21st July</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">70% Off</span><br> on buy</h3>
-                                            <div class="text-white m-t-20">
-                                                <i>- Eric Lee</i>
-                                            </div>
+                                        <div class="carousel-item flex-column carousel_height">
+											<div class="row">
+												<div class="col-8">
+													<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
+												</div>
+												<div class="col-4 text-left">
+													<img class="col-7" src="{{asset('assets/img/printers/dgi.png')}}" alt="">
+												</div>
+											</div>
+
+											@foreach ($dgi_order as $dgi_orders)
+												
+
+											<div class="row text-light mt-2">
+												<div class="col-4">{{$dgi_orders->cust_name}}</div>
+												<div class="col-4">{{$dgi_orders->total_meter}} <span>م</span></div>
+												<div class="col-4">{{{$dgi_orders->designer}}}</div>
+											</div>
+
+											@endforeach
+											
                                         </div>
-                                        <div class="carousel-item flex-column">
-                                           <i class="si si-social-twitter tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">12th Aug</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">80% Off</span><br> on buy</h3>
+                                        <div class="carousel-item flex-column carousel_height">
                                             <div class="text-white m-t-20">
-                                                <i>- Eric Lee</i>
+												<div class="row">
+													<div class="col-8">
+														<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
+													</div>
+													<div class="col-4 text-left">
+														<img class="col-12" src="{{asset('assets/img/printers/sky.png')}}" alt="">
+													</div>
+												</div>
+
+												@foreach ($sky_order as $sky_order)
+												
+
+												<div class="row text-light mt-2">
+													<div class="col-4">{{$sky_order->cust_name}}</div>
+													<div class="col-4">{{$sky_order->total_meter}} <span>م</span></div>
+													<div class="col-4">{{{$sky_order->designer}}}</div>
+												</div>
+	
+												@endforeach
+                                              
                                             </div>
                                         </div>
                                     </div>
@@ -196,29 +268,46 @@
                                 <div id="myCarousel1" class="carousel slide" data-ride="carousel">
                                     <!-- Carousel items -->
                                     <div class="carousel-inner">
-                                        <div class="carousel-item active flex-column">
-                                            <i class="si si-social-facebook tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">25th June</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">30% Off</span><br>on buy</h3>
+                                        <div class="carousel-item active flex-column carousel_height">
+                                            <p class="text-white mt-2 mb-3 h5">صورة اخر اوردر</p>
+											<div class=" last_orders_div mt-2 col-12 height-30 position-relative overflow-hidden">
+												<a href="{{ url('viewfile') }}/{{ $last_order->cust_name }}/{{ $last_order->images }}" target="_blacnk">
+													<img src="{{asset('Attachments/'.$last_order->cust_name.'/'.$last_order->images)}}"
+														 alt="صورة"></a>											</div>
+                                        </div>
+
+                                        <div class="carousel-item flex-column carousel_height">
+											<p class="text-white mt-2 mb-3 h5">بيانات اخر اوردر</p>
+                                            <p class="text-white mt-2">{{$last_order->cust_name}}</p>
+                                            <h3 class="text-white font-light">عدد الامتار : <span class="font-bold">{{$last_order->total_meter}}</span><br>  </h3>
                                             <div class="text-white m-t-20">
-                                                <i>- Eric Lee</i>
+											<i>
+												@if ($last_order->printer == 'fedar')
+													 {{'فيدار'}}
+													 <img style="width: 90px" class="mr-3" src="{{asset('assets/img/printers/fedar.png')}}" alt="صورة">
+
+													 {{-- <a href="{{ url('viewfile') }}/{{ $sublimationn->cust_name }}/{{ $sublimationn->images }}" target="_blacnk">
+														<img src="{{asset('Attachments/'.$sublimationn->cust_name.'/'.$sublimationn->images)}}"
+															style="width: 50px; height:50px" alt=""></a> --}}
+												@endif
+												@if ($last_order->printer == 'dgi')
+													 {{'دي جي اي'}}
+													 <img style="width: 45px" class="mr-3" src="{{asset('assets/img/printers/dgi.png')}}" alt="صورة">
+
+												@endif
+												@if ($last_order->printer == 'sky')
+													سكاي
+													 <img style="width: 90px" class="mr-3" src="{{asset('assets/img/printers/sky.png')}}" alt="صورة">
+
+												@endif
+														
+											</i>
                                             </div>
                                         </div>
-                                        <div class="carousel-item flex-column">
-                                            <i class="si si-social-google tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">6th July</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">70% Off</span><br> on buy</h3>
-                                            <div class="text-white m-t-20">
-                                                <i>- Eric Lee</i>
-                                            </div>
-                                        </div>
-                                        <div class="carousel-item flex-column">
-                                            <i class="si si-social-twitter tx-30 text-white mb-2"></i>
-                                            <p class="text-white mt-2">7th Aug</p>
-                                            <h3 class="text-white font-light">Now Get <span class="font-bold">80% Off</span><br> on buy</h3>
-                                            <div class="text-white m-t-20">
-                                                <i>- Eric Lee</i>
-                                            </div>
+
+                                        <div class="carousel-item flex-column carousel_height">
+                                            <p class="text-white mt-2 h4"> اجمالي امتار <b>{{$last_order->cust_name}}</b></p>
+                                            <h3 class="text-white font-light mt-4"> م <span class="font-bold">{{$last_customer_meter}}</span><br></h3>
                                         </div>
                                     </div>
                                 </div>
@@ -229,54 +318,144 @@
 				<!-- row closed -->
 
 
-								<!-- row -->
-								<div class="row row-sm">
-									<div class="col-md-12 col-xl-4">
-										<div class="card">
-											<div class="card-body">
-												<div class="d-flex justify-content-between">
-													<h4 class="card-title">Active Projects</h4>
-													<i class="mdi mdi-dots-vertical"></i>
-												</div>
-												<p class="card-description mb-1">What're people doing right now</p>
-												<div class="list d-flex align-items-center border-bottom py-3">
-													<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
-														<span class="avatar-status bg-green"></span>
-													</div>
-													<div class="wrapper w-100 mr-3">
-														<p class="mb-0">
-														<b>Lilly </b>posted in Website</p>
-														<div class="d-sm-flex justify-content-between align-items-center">
-															<div class="d-flex align-items-center">
-																<i class="mdi mdi-clock text-muted ml-1"></i>
-																<p class="mb-0">Awesome websites!</p>
-															</div>
-															<small class="text-muted mr-auto">2 hours ago</small>
-														</div>
-													</div>
-												</div>
-												<div class="list d-flex align-items-center border-bottom py-3">
-													<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
-														<span class="avatar-status bg-green"></span>
-													</div>
-													<div class="wrapper w-100 mr-3">
-														<p class="mb-0">
-														<b>Thomos</b>posted in Material</p>
-														<div class="d-sm-flex justify-content-between align-items-center">
-															<div class="d-flex align-items-center">
-																<i class="mdi mdi-clock text-muted ml-1"></i>
-																<p class="mb-0">Awesome websites!</p>
-															</div>
-															<small class="text-muted mr-auto">3 hours ago</small>
-														</div>
-													</div>
-												</div>
+				<!-- row -->
+				<div class="row row-sm">
+					<div class="col-md-4 col-xl-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h4 class="card-title">التعليقات <a href=""><i class="fa fa-plus mr-3"></i></a></h4>
+									<i class="mdi mdi-dots-vertical"></i>
+								</div>
+								<p class="card-description mb-1">اترك ملوحظاتك هنا ليراها الجميع</p>
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
 
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0"><b></b>محمد محروس</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">شغل اسامه يتكبس كلو علي ساتان</p>
 											</div>
+											<small class="text-muted mr-auto">10-3-2023</small>
 										</div>
 									</div>
 								</div>
-								<!-- /row -->
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-xl-8">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h4 class="card-title">الوصول <a href=""><i class="fa fa-plus mr-3"></i></a></h4>
+									<i class="mdi mdi-dots-vertical"></i>
+								</div>
+								<p class="card-description mb-1">اترك ملوحظاتك هنا ليراها الجميع</p>
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0"><b></b>محمد محروس</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">شغل اسامه يتكبس كلو علي ساتان</p>
+											</div>
+											<small class="text-muted mr-auto">10-3-2023</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /row closed -->
+
+				<!-- row -->
+
+				<!-- /row  closed-->
+
+
+
+
+
+
 			</div>
 		</div>
 		<!-- Container closed -->

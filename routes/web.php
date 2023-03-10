@@ -30,7 +30,7 @@ Route::get('addadmin',function(){
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('/home');
 
 Route::get('sublimation','App\Http\Controllers\sublimationController@index');
 Route::get('sublimation/create','App\Http\Controllers\sublimationController@create');

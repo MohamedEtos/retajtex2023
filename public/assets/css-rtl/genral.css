@@ -40,7 +40,7 @@
     background-color: gold;
     color: #fff;
     position: absolute;
-    bottom: 0px;
+    bottom: 22px;
     left: 80px;
     
   }
@@ -49,7 +49,7 @@
     background-color: silver;
     color: #fff;
     position: absolute;
-    bottom: 0px;
+    bottom: 22px;
     left: 30px;
   }
   .awards .tre{
@@ -57,14 +57,46 @@
     background-color: #CD7F32;
     color: #fff;
     position: absolute;
-    bottom: 0px;
+    bottom: 22px;
     left: 130px;
   }
   .awards .st_num{
     color: #fff;
     position: absolute;
     z-index: 5;
-    bottom: -10px;
-    left: 130px;
+    bottom: 0px;
+    left: 80px;
+  }
+  .awards .sec_num{
+    color: #fff;
+    position: absolute;
+    z-index: 5;
+    bottom: 0px;
+    left: 30px;
+  }
+  .awards .tre_num{
+    color: #fff;
+    position: absolute;
+    z-index: 5;
+    bottom: 0px;
+    left: 134px;
   }
 
+  .carousel_height{
+    height: 150px;
+  }
+
+  .hidden{
+    color: transparent;
+  }
+
+
+.last_orders_div{
+  border-radius: 8px;
+}
+
+.last_orders_image{
+  margin-top: -45px;
+  border-radius: 35px;
+
+}

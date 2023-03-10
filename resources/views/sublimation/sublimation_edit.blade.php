@@ -102,9 +102,9 @@
                             <select name="printer" id="printer" class="form-control" >
                                 <!--placeholder-->
                                 <option value="" selected disabled>حدد ماكينة الطباعه</option>
-                                <option value="Fedar">Fedar</option>
-                                <option value="DGI">DGI</option>
-                                <option value="Sky">SKY</option>
+                                <option value="fedar">Fedar</option>
+                                <option value="dgi">DGI</option>
+                                <option value="sky">SKY</option>
                             </select>
                         </div>
 
