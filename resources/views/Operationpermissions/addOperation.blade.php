@@ -69,7 +69,7 @@
                     <div class="row mb-2">
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="cus_name" class="control-label">اسم العميل</label>
-                            <input list="brow" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                            <input required list="brow" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                             <datalist id="brow">
                                 @foreach ($cust_name as $cust_names)
                                 <option value="{{$cust_names->cust_name}}">
@@ -79,7 +79,7 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="ptint_type" class="control-label">عدد القطع او نوع الطباعه</label>
-                            <input type="text" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
+                            <input  type="text" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
                         </div>
 
 
@@ -98,7 +98,7 @@
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="printer" class="control-label">ماكينة الطباعة</label>
-                                <select name="printer" id="printer" class="form-control" >
+                                <select required name="printer" id="printer" class="form-control" >
                                     <!--placeholder-->
                                     <option value="{{$printer_name}}" selected>{{$printer_name}}</option>
                                     <option value="fedar">Fedar</option>
@@ -108,14 +108,14 @@
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
-                                <label class="control-label ">تاريخ تاكيد الاوردر</label>
+                                <label required class="control-label ">تاريخ تاكيد الاوردر</label>
                                 <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{ date('Y-m-d') }}" >
                             </div>
     
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="designer" class="control-label">المصمم</label>
-                                <input type="text" class="form-control form-control-lg" id="designer" value="{{Auth::User()->name}}" name="designer" >
+                                <input required type="text" class="form-control form-control-lg" id="designer" value="{{Auth::User()->name}}" name="designer" >
                             </div>
 
                     </div>
@@ -126,12 +126,12 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
-                            <input type="text" class="form-control form-control-lg" id="phone_number"  name="phone_number" >
+                            <input readonly type="text" class="form-control form-control-lg" id="phone_number" placeholder="(اخياري)"  name="phone_number" >
                         </div>
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="path"  class="control-label">مكان الملف</label>
-                            <input type="text" class="form-control form-control-lg" id="path"  name="path" >
+                            <input required type="text" class="form-control form-control-lg" id="path" placeholder="(اخياري)"  name="path" >
                         </div>
 
                     </div>
@@ -152,7 +152,7 @@
                         <div class="col-sm-12 col-md-4 mt-4">
                             <label for="">صورة التصميم</label>
                             <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
-                            <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                            <input required type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
                                 data-height="107" />
                         </div>
 

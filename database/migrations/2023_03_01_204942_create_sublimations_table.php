@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('sublimations', function (Blueprint $table) {
             $table->id();
-            $table->string('cust_name')->nullable();
-            $table->integer('copy')->nullable();
-            $table->integer('fileh')->nullable();
-            $table->integer('total_meter')->nullable();
-            $table->string('printer')->nullable();
+            $table->string('cust_name');
+            $table->integer('copy');
+            $table->integer('fileh');
+            $table->integer('total_meter');
+            $table->string('printer');
             $table->string('type_print')->nullable();
-            $table->string('date')->nullable();
-            $table->string('designer')->nullable();
+            $table->string('date');
+            $table->string('designer');
             $table->string('phone_number')->nullable();
-            $table->string('who_signed_order')->nullable();
+            $table->string('who_signed_order');
             $table->text('note')->nullable();
-            $table->string('images')->nullable();
+            $table->string('images');
             $table->softDeletes();
             $table->timestamps();
         });

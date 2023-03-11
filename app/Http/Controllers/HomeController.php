@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth'); 
+        $this->middleware('auth'); 
     }
 
     /**
@@ -38,17 +38,17 @@ class HomeController extends Controller
         $last_customer_meter = sublimation::where('cust_name',$last_order->cust_name)->sum('total_meter');
 
         
-        $mohamed_meter = Operationpermissions::where('designer','محمد محروس')->sum('total_meter');
-        $mariam_meter = Operationpermissions::where('designer','مريم محمد')->sum('total_meter');
-        $aya_meter = Operationpermissions::where('designer','ايه ايمن')->sum('total_meter');
+        $mohamed_meter = sublimation::where('designer','محمد محروس')->sum('total_meter');
+        $mariam_meter = sublimation::where('designer','مريم محمد')->sum('total_meter');
+        $aya_meter = sublimation::where('designer','ايه ايمن')->sum('total_meter');
 
-        $mohamed_cust = Operationpermissions::where('designer','محمد محروس')->distinct('cust_name')->count('cust_name');
-        $mariam_cust = Operationpermissions::where('designer','مريم محمد')->distinct('cust_name')->count('cust_name');
-        $aya_cust = Operationpermissions::where('designer','ايه ايمن')->distinct('cust_name')->count('cust_name');
+        $mohamed_cust = sublimation::where('designer','محمد محروس')->distinct('cust_name')->count('cust_name');
+        $mariam_cust = sublimation::where('designer','مريم محمد')->distinct('cust_name')->count('cust_name');
+        $aya_cust = sublimation::where('designer','ايه ايمن')->distinct('cust_name')->count('cust_name');
 
-        $mohamed_des = Operationpermissions::where('designer','محمد محروس')->count();
-        $mariam_des = Operationpermissions::where('designer','مريم محمد')->count();
-        $aya_des = Operationpermissions::where('designer','ايه ايمن')->count();
+        $mohamed_des = sublimation::where('designer','محمد محروس')->count();
+        $mariam_des = sublimation::where('designer','مريم محمد')->count();
+        $aya_des = sublimation::where('designer','ايه ايمن')->count();
 
         return view('home',compact(
             'cust_counter',

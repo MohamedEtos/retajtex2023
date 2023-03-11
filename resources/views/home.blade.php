@@ -194,7 +194,7 @@
 													<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
 												</div>
 												<div class="col-4 text-left">
-													<img class="col-12" src="{{asset('assets/img/printers/fedar.png')}}" alt="">
+													<img class="col-12" src="{{asset('assets/img/printers/fedar-w.png')}}" alt="">
 												</div>
 											</div>
 
@@ -216,7 +216,7 @@
 													<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
 												</div>
 												<div class="col-4 text-left">
-													<img class="col-7" src="{{asset('assets/img/printers/dgi.png')}}" alt="">
+													<img class="col-7" src="{{asset('assets/img/printers/dgi-w.png')}}" alt="">
 												</div>
 											</div>
 
@@ -239,7 +239,7 @@
 														<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
 													</div>
 													<div class="col-4 text-left">
-														<img class="col-12" src="{{asset('assets/img/printers/sky.png')}}" alt="">
+														<img class="col-12" src="{{asset('assets/img/printers/sky-w.png')}}" alt="">
 													</div>
 												</div>
 
@@ -284,7 +284,7 @@
 											<i>
 												@if ($last_order->printer == 'fedar')
 													 {{'فيدار'}}
-													 <img style="width: 90px" class="mr-3" src="{{asset('assets/img/printers/fedar.png')}}" alt="صورة">
+													 <img style="width: 90px" class="mr-3" src="{{asset('assets/img/printers/fedar-w.png')}}" alt="صورة">
 
 													 {{-- <a href="{{ url('viewfile') }}/{{ $sublimationn->cust_name }}/{{ $sublimationn->images }}" target="_blacnk">
 														<img src="{{asset('Attachments/'.$sublimationn->cust_name.'/'.$sublimationn->images)}}"
@@ -292,12 +292,12 @@
 												@endif
 												@if ($last_order->printer == 'dgi')
 													 {{'دي جي اي'}}
-													 <img style="width: 45px" class="mr-3" src="{{asset('assets/img/printers/dgi.png')}}" alt="صورة">
+													 <img style="width: 45px" class="mr-3" src="{{asset('assets/img/printers/dgi-w.png')}}" alt="صورة">
 
 												@endif
 												@if ($last_order->printer == 'sky')
 													سكاي
-													 <img style="width: 90px" class="mr-3" src="{{asset('assets/img/printers/sky.png')}}" alt="صورة">
+													 <img style="width: 110px" class="mr-3" src="{{asset('assets/img/printers/sky-w.png')}}" alt="صورة">
 
 												@endif
 														
