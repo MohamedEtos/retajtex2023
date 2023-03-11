@@ -131,7 +131,7 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="path"  class="control-label">مكان الملف</label>
-                            <input required type="text" class="form-control form-control-lg" id="path" placeholder="(اخياري)"  name="path" >
+                            <input  type="text" class="form-control form-control-lg" id="path" placeholder="(اخياري)"  name="path" >
                         </div>
 
                     </div>

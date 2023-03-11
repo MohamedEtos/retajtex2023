@@ -27,12 +27,9 @@ Auth::routes();
 
 
 Route::group([ 'middleware'=>'auth'], function(){
-
-
-    Route::get('/', function () {
-        return view('welcome');
-    })->name('/home');
     
+    Route::get('/index', 'App\Http\Controllers\HomeController@index');
+    Route::get('/', 'App\Http\Controllers\HomeController@index');
     Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
     Route::get('sublimation','App\Http\Controllers\sublimationController@index');
@@ -54,7 +51,6 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::get('emps','App\Http\Controllers\empsController@index');
     Route::post('emps.create','App\Http\Controllers\empsController@create');
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     
 });

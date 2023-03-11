@@ -1,5 +1,9 @@
 @extends('layouts.master')
 @section('css')
+
+@section('title')
+ريتاج  تكس - الرئيسية
+@endsection
 <!--  Owl-carousel css-->
 <link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
 <!-- Maps css -->
@@ -10,11 +14,11 @@
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">Hi, welcome back!</h2>
-						  <p class="mg-b-0">Sales monitoring dashboard template.</p>
+						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">مرحباً بعودتك <b>{{Auth::User()->name}}</b></h2>
+						  <p class="mg-b-0"></p>
 						</div>
 					</div>
-					<div class="main-dashboard-header-right">
+					{{-- <div class="main-dashboard-header-right">
 						<div>
 							<label class="tx-13">Customer Ratings</label>
 							<div class="main-star">
@@ -29,412 +33,434 @@
 							<label class="tx-13">Offline Sales</label>
 							<h5>783,675</h5>
 						</div>
-					</div>
+					</div> --}}
 				</div>
 				<!-- /breadcrumb -->
 @endsection
 @section('content')
 				<!-- row -->
-				<div class="row row-sm">
-					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-						<div class="card overflow-hidden sales-card bg-primary-gradient">
-							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-								<div class="">
-									<h6 class="mb-3 tx-12 text-white">TODAY ORDERS</h6>
-								</div>
-								<div class="pb-0 mt-0">
-									<div class="d-flex">
-										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$5,74.12</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
-										</div>
-										<span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7"> +427</span>
-										</span>
+				<div class="row">
+					<div class="col-lg-3 col-md-6">
+						<div class="card  bg-primary-gradient">
+							<div class="card-body">
+								<div class="counter-status d-flex md-mb-0">
+									<div class="counter-icon">
+										<i class="icon icon-people"></i>
+									</div>
+									<div class="mr-auto">
+										<h5 class="tx-13 tx-white-8 mb-3">العملاء</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$cust_counter}}</h2>
 									</div>
 								</div>
 							</div>
-							<span id="compositeline" class="pt-1">5,9,5,6,4,12,18,14,10,15,12,5,8,5,12,5,12,10,16,12</span>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-						<div class="card overflow-hidden sales-card bg-danger-gradient">
-							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-								<div class="">
-									<h6 class="mb-3 tx-12 text-white">TODAY EARNINGS</h6>
-								</div>
-								<div class="pb-0 mt-0">
-									<div class="d-flex">
-										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$1,230.17</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
-										</div>
-										<span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> -23.09%</span>
-										</span>
+					<div class="col-lg-3 col-md-6">
+						<div class="card  bg-danger-gradient">
+							<div class="card-body">
+								<div class="counter-status d-flex md-mb-0">
+									<div class="counter-icon text-warning">
+										<i class="icon icon-rocket"></i>
+									</div>
+									<div class="mr-auto">
+										<h5 class="tx-13 tx-white-8 mb-3">اجمالي الامتار المطبوعه</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$total_printed}}</h2>
 									</div>
 								</div>
 							</div>
-							<span id="compositeline2" class="pt-1">3,2,4,6,12,14,8,7,14,16,12,7,8,4,3,2,2,5,6,7</span>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-						<div class="card overflow-hidden sales-card bg-success-gradient">
-							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-								<div class="">
-									<h6 class="mb-3 tx-12 text-white">TOTAL EARNINGS</h6>
-								</div>
-								<div class="pb-0 mt-0">
-									<div class="d-flex">
-										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$7,125.70</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
-										</div>
-										<span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-up text-white"></i>
-											<span class="text-white op-7"> 52.09%</span>
-										</span>
+					<div class="col-lg-3 col-md-6">
+						<div class="card  bg-success-gradient">
+							<div class="card-body">
+								<div class="counter-status d-flex md-mb-0">
+									<div class="counter-icon text-primary">
+										<i class="icon icon-docs"></i>
+									</div>
+									<div class="mr-auto">
+										<h5 class="tx-13 tx-white-8 mb-3">الامتار اليومية</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$printed_today}}</h2>
 									</div>
 								</div>
 							</div>
-							<span id="compositeline3" class="pt-1">5,10,5,20,22,12,15,18,20,15,8,12,22,5,10,12,22,15,16,10</span>
 						</div>
 					</div>
-					<div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
-						<div class="card overflow-hidden sales-card bg-warning-gradient">
-							<div class="pl-3 pt-3 pr-3 pb-2 pt-0">
-								<div class="">
-									<h6 class="mb-3 tx-12 text-white">PRODUCT SOLD</h6>
-								</div>
-								<div class="pb-0 mt-0">
-									<div class="d-flex">
-										<div class="">
-											<h4 class="tx-20 font-weight-bold mb-1 text-white">$4,820.50</h4>
-											<p class="mb-0 tx-12 text-white op-7">Compared to last week</p>
-										</div>
-										<span class="float-right my-auto mr-auto">
-											<i class="fas fa-arrow-circle-down text-white"></i>
-											<span class="text-white op-7"> -152.3</span>
-										</span>
+					<div class="col-lg-3 col-md-6">
+						<div class="card  bg-warning-gradient">
+							<div class="card-body">
+								<div class="counter-status d-flex md-mb-0">
+									<div class="counter-icon text-success">
+										<i class="icon icon-emotsmile"></i>
+									</div>
+									<div class="mr-auto">
+										<h5 class="tx-13 tx-white-8 mb-3">اذونات التشغيل المتاحه</h5>
+										<h2 class="counter mb-0 text-white text-left">{{$permossionPrinted}}</h2>
 									</div>
 								</div>
 							</div>
-							<span id="compositeline4" class="pt-1">5,9,5,6,4,12,18,14,10,15,12,5,8,5,12,5,12,10,16,12</span>
 						</div>
 					</div>
 				</div>
 				<!-- row closed -->
 
-				<!-- row opened -->
+
+				<!-- row -->
+				<div class="row">
+                    <!-- col -->
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card bg-primary-gradient">
+                            <div class="card-body">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner carousel_height carousel_height">
+                                        <div class="carousel-item active flex-column">
+                                            {{-- <i class="fa fa-trophy tx-30 text-white mb-2"></i> --}}
+                                            <p class="text-white mt-2 h4">المصممين</p>
+												<div class="card-body">
+													<div class="row text-light">
+														<div class="col text-center">
+															<label class="tx-12">محمد محروس</label>
+															<p class="font-weight-bold tx-20">{{$mohamed_meter}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">مريم محمد</label>
+															<p class="font-weight-bold tx-20">{{$mariam_meter}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">ايه ايمن</label>
+															<p class="font-weight-bold tx-20">{{$aya_meter}}</p>
+														</div><!-- col -->
+													</div><!-- row -->
+
+												</div>
+	
+
+                                        </div>
+                                        <div class="carousel-item flex-column carousel_height ">
+                                            <p class="text-white mt-2 h4">العملاء لكل مصمم</p>
+												<div class="card-body">
+													<div class="row text-light">
+														<div class="col text-center">
+															<label class="tx-12"> محروس</label>
+															<p class="font-weight-bold tx-20">{{$mohamed_cust}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">مريم محمد</label>
+															<p class="font-weight-bold tx-20">{{$mariam_cust}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">ايه ايمن</label>
+															<p class="font-weight-bold tx-20">{{$aya_cust}}</p>
+														</div><!-- col -->
+													</div><!-- row -->
+
+												</div>
+                                        </div>
+                                        <div class="carousel-item flex-column carousel_height">
+                                            <p class="text-white mt-2 h4">التصميمات</p>
+												<div class="card-body">
+													<div class="row text-light">
+														<div class="col text-center">
+															<label class="tx-12">محمد محروس</label>
+															<p class="font-weight-bold tx-20">{{$mohamed_des}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">مريم محمد</label>
+															<p class="font-weight-bold tx-20">{{$mariam_des}}</p>
+														</div><!-- col -->
+														<div class="col border-right text-center">
+															<label class="tx-12">ايه ايمن</label>
+															<p class="font-weight-bold tx-20">{{$aya_des}}</p>
+														</div><!-- col -->
+													</div><!-- row -->
+
+												</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<!-- col -->
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card bg-danger-gradient">
+                            <div class="card-body">
+                                <div id="myCarousel0" class="carousel slide" data-ride="carousel">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active flex-column carousel_height">
+											<div class="row">
+												<div class="col-8">
+													<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
+												</div>
+												<div class="col-4 text-left">
+													<img class="col-12" src="{{asset('assets/img/printers/fedar-w.png')}}" alt="">
+												</div>
+											</div>
+
+											@foreach ($fedar_order as $fedar_orders)
+												
+											<div class="row text-light mt-2">
+												<div class="col-4">{{$fedar_orders->cust_name}}</div>
+												<div class="col-4">{{$fedar_orders->total_meter}} <span>م</span></div>
+												<div class="col-4">{{{$fedar_orders->designer}}}</div>
+											</div>
+
+											@endforeach
+
+											@if($fedar_order == null)
+											<div class="row text-light mt-2">
+												<div class="col-12 h4">لا يوجد اذونات متاحه </div>
+											</div>
+											@endif
+
+                                        </div>
+                                        <div class="carousel-item flex-column carousel_height">
+											<div class="row">
+												<div class="col-8">
+													<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
+												</div>
+												<div class="col-4 text-left">
+													<img class="col-7" src="{{asset('assets/img/printers/dgi-w.png')}}" alt="">
+												</div>
+											</div>
+
+											@foreach ($dgi_order as $dgi_orders)
+												
+
+											<div class="row text-light mt-2">
+												<div class="col-4">{{$dgi_orders->cust_name}}</div>
+												<div class="col-4">{{$dgi_orders->total_meter}} <span>م</span></div>
+												<div class="col-4">{{{$dgi_orders->designer}}}</div>
+											</div>
+
+											@endforeach
+											
+                                        </div>
+                                        <div class="carousel-item flex-column carousel_height">
+                                            <div class="text-white m-t-20">
+												<div class="row">
+													<div class="col-8">
+														<p class="text-white mt-2 h5">اذونات التشغيل المتاحه</p>
+													</div>
+													<div class="col-4 text-left">
+														<img class="col-12" src="{{asset('assets/img/printers/sky-w.png')}}" alt="">
+													</div>
+												</div>
+
+												@foreach ($sky_order as $sky_order)
+												
+
+												<div class="row text-light mt-2">
+													<div class="col-4">{{$sky_order->cust_name}}</div>
+													<div class="col-4">{{$sky_order->total_meter}} <span>م</span></div>
+													<div class="col-4">{{{$sky_order->designer}}}</div>
+												</div>
+	
+												@endforeach
+                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<!-- col -->
+                    <div class="col-lg-4 col-md-4">
+                        <div class="card bg-purple-gradient">
+                            <div class="card-body">
+                                <div id="myCarousel1" class="carousel slide" data-ride="carousel">
+                                    <!-- Carousel items -->
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active flex-column carousel_height">
+                                            <p class="text-white mt-2 mb-3 h5">صورة اخر اوردر</p>
+											<div class=" last_orders_div mt-2 col-12 height-30 position-relative overflow-hidden">
+												<a href="{{ url('viewfile') }}/{{ $last_order->cust_name }}/{{ $last_order->images }}" target="_blacnk">
+													<img src="{{asset('Attachments/'.$last_order->cust_name.'/'.$last_order->images)}}"
+														 alt="صورة"></a>											</div>
+                                        </div>
+
+                                        <div class="carousel-item flex-column carousel_height">
+											<p class="text-white mt-2 mb-3 h5">بيانات اخر اوردر</p>
+                                            <p class="text-white mt-2">{{$last_order->cust_name}}</p>
+                                            <h3 class="text-white font-light">عدد الامتار : <span class="font-bold">{{$last_order->total_meter}}</span><br>  </h3>
+                                            <div class="text-white m-t-20">
+											<i>
+												@if ($last_order->printer == 'fedar')
+													 {{'فيدار'}}
+													 <img style="width: 90px" class="mr-3" src="{{asset('assets/img/printers/fedar-w.png')}}" alt="صورة">
+
+													 {{-- <a href="{{ url('viewfile') }}/{{ $sublimationn->cust_name }}/{{ $sublimationn->images }}" target="_blacnk">
+														<img src="{{asset('Attachments/'.$sublimationn->cust_name.'/'.$sublimationn->images)}}"
+															style="width: 50px; height:50px" alt=""></a> --}}
+												@endif
+												@if ($last_order->printer == 'dgi')
+													 {{'دي جي اي'}}
+													 <img style="width: 45px" class="mr-3" src="{{asset('assets/img/printers/dgi-w.png')}}" alt="صورة">
+
+												@endif
+												@if ($last_order->printer == 'sky')
+													سكاي
+													 <img style="width: 110px" class="mr-3" src="{{asset('assets/img/printers/sky-w.png')}}" alt="صورة">
+
+												@endif
+														
+											</i>
+                                            </div>
+                                        </div>
+
+                                        <div class="carousel-item flex-column carousel_height">
+                                            <p class="text-white mt-2 h4"> اجمالي امتار <b>{{$last_order->cust_name}}</b></p>
+                                            <h3 class="text-white font-light mt-4"> م <span class="font-bold">{{$last_customer_meter}}</span><br></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+				<!-- row closed -->
+
+
+				<!-- row -->
 				<div class="row row-sm">
-					<div class="col-md-12 col-lg-12 col-xl-7">
+					<div class="col-md-4 col-xl-4">
 						<div class="card">
-							<div class="card-header bg-transparent pd-b-0 pd-t-20 bd-b-0">
+							<div class="card-body">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mb-0">Order status</h4>
-									<i class="mdi mdi-dots-horizontal text-gray"></i>
+									<h4 class="card-title">التعليقات <a href=""><i class="fa fa-plus mr-3"></i></a></h4>
+									<i class="mdi mdi-dots-vertical"></i>
 								</div>
-								<p class="tx-12 text-muted mb-0">Order Status and Tracking. Track your order from ship date to arrival. To begin, enter your order number.</p>
-							</div>
-							<div class="card-body">
-								<div class="total-revenue">
-									<div>
-									  <h4>120,750</h4>
-									  <label><span class="bg-primary"></span>success</label>
+								<p class="card-description mb-1">اترك ملوحظاتك هنا ليراها الجميع</p>
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
+										<span class="avatar-status bg-green"></span>
 									</div>
-									<div>
-									  <h4>56,108</h4>
-									  <label><span class="bg-danger"></span>Pending</label>
-									</div>
-									<div>
-									  <h4>32,895</h4>
-									  <label><span class="bg-warning"></span>Failed</label>
-									</div>
-								  </div>
-								<div id="bar" class="sales-bar mt-4"></div>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-12 col-xl-5">
-						<div class="card card-dashboard-map-one">
-							<label class="main-content-label">Sales Revenue by Customers in USA</label>
-							<span class="d-block mg-b-20 text-muted tx-12">Sales Performance of all states in the United States</span>
-							<div class="">
-								<div class="vmap-wrapper ht-180" id="vmap2"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- row closed -->
 
-				<!-- row opened -->
-				<div class="row row-sm">
-					<div class="col-xl-4 col-md-12 col-lg-12">
-						<div class="card">
-							<div class="card-header pb-1">
-								<h3 class="card-title mb-2">Recent Customers</h3>
-								<p class="tx-12 mb-0 text-muted">A customer is an individual or business that purchases the goods service has evolved to include real-time</p>
-							</div>
-							<div class="card-body p-0 customers mt-1">
-								<div class="list-group list-lg-group list-group-flush">
-									<div class="list-group-item list-group-item-action" href="#">
-										<div class="media mt-0">
-											<img class="avatar-lg rounded-circle ml-3 my-auto" src="{{URL::asset('assets/img/faces/3.jpg')}}" alt="Image description">
-											<div class="media-body">
-												<div class="d-flex align-items-center">
-													<div class="mt-0">
-														<h5 class="mb-1 tx-15">Samantha Melon</h5>
-														<p class="mb-0 tx-13 text-muted">User ID: #1234 <span class="text-success ml-2">Paid</span></p>
-													</div>
-													<span class="mr-auto wd-45p fs-16 mt-2">
-														<div id="spark1" class="wd-100p"></div>
-													</span>
-												</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0"><b></b>محمد محروس</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">شغل اسامه يتكبس كلو علي ساتان</p>
 											</div>
-										</div>
-									</div>
-									<div class="list-group-item list-group-item-action" href="#">
-										<div class="media mt-0">
-											<img class="avatar-lg rounded-circle ml-3 my-auto" src="{{URL::asset('assets/img/faces/11.jpg')}}" alt="Image description">
-											<div class="media-body">
-												<div class="d-flex align-items-center">
-													<div class="mt-1">
-														<h5 class="mb-1 tx-15">Jimmy Changa</h5>
-														<p class="mb-0 tx-13 text-muted">User ID: #1234 <span class="text-danger ml-2">Pending</span></p>
-													</div>
-													<span class="mr-auto wd-45p fs-16 mt-2">
-														<div id="spark2" class="wd-100p"></div>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="list-group-item list-group-item-action" href="#">
-										<div class="media mt-0">
-											<img class="avatar-lg rounded-circle ml-3 my-auto" src="{{URL::asset('assets/img/faces/17.jpg')}}" alt="Image description">
-											<div class="media-body">
-												<div class="d-flex align-items-center">
-													<div class="mt-1">
-														<h5 class="mb-1 tx-15">Gabe Lackmen</h5>
-														<p class="mb-0 tx-13 text-muted">User ID: #1234<span class="text-danger ml-2">Pending</span></p>
-													</div>
-													<span class="mr-auto wd-45p fs-16 mt-2">
-														<div id="spark3" class="wd-100p"></div>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="list-group-item list-group-item-action" href="#">
-										<div class="media mt-0">
-											<img class="avatar-lg rounded-circle ml-3 my-auto" src="{{URL::asset('assets/img/faces/15.jpg')}}" alt="Image description">
-											<div class="media-body">
-												<div class="d-flex align-items-center">
-													<div class="mt-1">
-														<h5 class="mb-1 tx-15">Manuel Labor</h5>
-														<p class="mb-0 tx-13 text-muted">User ID: #1234<span class="text-success ml-2">Paid</span></p>
-													</div>
-													<span class="mr-auto wd-45p fs-16 mt-2">
-														<div id="spark4" class="wd-100p"></div>
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="list-group-item list-group-item-action br-br-7 br-bl-7" href="#">
-										<div class="media mt-0">
-											<img class="avatar-lg rounded-circle ml-3 my-auto" src="{{URL::asset('assets/img/faces/6.jpg')}}" alt="Image description">
-											<div class="media-body">
-												<div class="d-flex align-items-center">
-													<div class="mt-1">
-														<h5 class="mb-1 tx-15">Sharon Needles</h5>
-														<p class="b-0 tx-13 text-muted mb-0">User ID: #1234<span class="text-success ml-2">Paid</span></p>
-													</div>
-													<span class="mr-auto wd-45p fs-16 mt-2">
-														<div id="spark5" class="wd-100p"></div>
-													</span>
-												</div>
-											</div>
+											<small class="text-muted mr-auto">10-3-2023</small>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-md-12 col-lg-6">
-						<div class="card">
-							<div class="card-header pb-1">
-								<h3 class="card-title mb-2">Sales Activity</h3>
-								<p class="tx-12 mb-0 text-muted">Sales activities are the tactics that salespeople use to achieve their goals and objective</p>
-							</div>
-							<div class="product-timeline card-body pt-2 mt-1">
-								<ul class="timeline-1 mb-0">
-									<li class="mt-0"> <i class="ti-pie-chart bg-primary-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Total Products</span> <a href="#" class="float-left tx-11 text-muted">3 days ago</a>
-										<p class="mb-0 text-muted tx-12">1.3k New Products</p>
-									</li>
-									<li class="mt-0"> <i class="mdi mdi-cart-outline bg-danger-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Total Sales</span> <a href="#" class="float-left tx-11 text-muted">35 mins ago</a>
-										<p class="mb-0 text-muted tx-12">1k New Sales</p>
-									</li>
-									<li class="mt-0"> <i class="ti-bar-chart-alt bg-success-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Toatal Revenue</span> <a href="#" class="float-left tx-11 text-muted">50 mins ago</a>
-										<p class="mb-0 text-muted tx-12">23.5K New Revenue</p>
-									</li>
-									<li class="mt-0"> <i class="ti-wallet bg-warning-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Toatal Profit</span> <a href="#" class="float-left tx-11 text-muted">1 hour ago</a>
-										<p class="mb-0 text-muted tx-12">3k New profit</p>
-									</li>
-									<li class="mt-0"> <i class="si si-eye bg-purple-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Customer Visits</span> <a href="#" class="float-left tx-11 text-muted">1 day ago</a>
-										<p class="mb-0 text-muted tx-12">15% increased</p>
-									</li>
-									<li class="mt-0 mb-0"> <i class="icon-note icons bg-primary-gradient text-white product-icon"></i> <span class="font-weight-semibold mb-4 tx-14 ">Customer Reviews</span> <a href="#" class="float-left tx-11 text-muted">1 day ago</a>
-										<p class="mb-0 text-muted tx-12">1.5k reviews</p>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-xl-4 col-md-12 col-lg-6">
-						<div class="card">
-							<div class="card-header pb-0">
-								<h3 class="card-title mb-2">Recent Orders</h3>
-								<p class="tx-12 mb-0 text-muted">An order is an investor's instructions to a broker or brokerage firm to purchase or sell</p>
-							</div>
-							<div class="card-body sales-info ot-0 pt-0 pb-0">
-								<div id="chart" class="ht-150"></div>
-								<div class="row sales-infomation pb-0 mb-0 mx-auto wd-100p">
-									<div class="col-md-6 col">
-										<p class="mb-0 d-flex"><span class="legend bg-primary brround"></span>Delivered</p>
-										<h3 class="mb-1">5238</h3>
-										<div class="d-flex">
-											<p class="text-muted ">Last 6 months</p>
-										</div>
-									</div>
-									<div class="col-md-6 col">
-										<p class="mb-0 d-flex"><span class="legend bg-info brround"></span>Cancelled</p>
-											<h3 class="mb-1">3467</h3>
-										<div class="d-flex">
-											<p class="text-muted">Last 6 months</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card ">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="d-flex align-items-center pb-2">
-											<p class="mb-0">Total Sales</p>
-										</div>
-										<h4 class="font-weight-bold mb-2">$7,590</h4>
-										<div class="progress progress-style progress-sm">
-											<div class="progress-bar bg-primary-gradient wd-80p" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="78"></div>
-										</div>
-									</div>
-									<div class="col-md-6 mt-4 mt-md-0">
-										<div class="d-flex align-items-center pb-2">
-											<p class="mb-0">Active Users</p>
-										</div>
-										<h4 class="font-weight-bold mb-2">$5,460</h4>
-										<div class="progress progress-style progress-sm">
-											<div class="progress-bar bg-danger-gradient wd-75" role="progressbar"  aria-valuenow="45" aria-valuemin="0" aria-valuemax="45"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- row close -->
 
-				<!-- row opened -->
-				<div class="row row-sm row-deck">
-					<div class="col-md-12 col-lg-4 col-xl-4">
-						<div class="card card-dashboard-eight pb-2">
-							<h6 class="card-title">Your Top Countries</h6><span class="d-block mg-b-10 text-muted tx-12">Sales performance revenue based by country</span>
-							<div class="list-group">
-								<div class="list-group-item border-top-0">
-									<i class="flag-icon flag-icon-us flag-icon-squared"></i>
-									<p>United States</p><span>$1,671.10</span>
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
 								</div>
-								<div class="list-group-item">
-									<i class="flag-icon flag-icon-nl flag-icon-squared"></i>
-									<p>Netherlands</p><span>$1,064.75</span>
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
 								</div>
-								<div class="list-group-item">
-									<i class="flag-icon flag-icon-gb flag-icon-squared"></i>
-									<p>United Kingdom</p><span>$1,055.98</span>
-								</div>
-								<div class="list-group-item">
-									<i class="flag-icon flag-icon-ca flag-icon-squared"></i>
-									<p>Canada</p><span>$1,045.49</span>
-								</div>
-								<div class="list-group-item">
-									<i class="flag-icon flag-icon-in flag-icon-squared"></i>
-									<p>India</p><span>$1,930.12</span>
-								</div>
-								<div class="list-group-item border-bottom-0 mb-0">
-									<i class="flag-icon flag-icon-au flag-icon-squared"></i>
-									<p>Australia</p><span>$1,042.00</span>
-								</div>
+
 							</div>
 						</div>
 					</div>
-					<div class="col-md-12 col-lg-8 col-xl-8">
-						<div class="card card-table-two">
-							<div class="d-flex justify-content-between">
-								<h4 class="card-title mb-1">Your Most Recent Earnings</h4>
-								<i class="mdi mdi-dots-horizontal text-gray"></i>
-							</div>
-							<span class="tx-12 tx-muted mb-3 ">This is your most recent earnings for today's date.</span>
-							<div class="table-responsive country-table">
-								<table class="table table-striped table-bordered mb-0 text-sm-nowrap text-lg-nowrap text-xl-nowrap">
-									<thead>
-										<tr>
-											<th class="wd-lg-25p">Date</th>
-											<th class="wd-lg-25p tx-right">Sales Count</th>
-											<th class="wd-lg-25p tx-right">Earnings</th>
-											<th class="wd-lg-25p tx-right">Tax Witheld</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>05 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">34</td>
-											<td class="tx-right tx-medium tx-inverse">$658.20</td>
-											<td class="tx-right tx-medium tx-danger">-$45.10</td>
-										</tr>
-										<tr>
-											<td>06 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">26</td>
-											<td class="tx-right tx-medium tx-inverse">$453.25</td>
-											<td class="tx-right tx-medium tx-danger">-$15.02</td>
-										</tr>
-										<tr>
-											<td>07 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">34</td>
-											<td class="tx-right tx-medium tx-inverse">$653.12</td>
-											<td class="tx-right tx-medium tx-danger">-$13.45</td>
-										</tr>
-										<tr>
-											<td>08 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">45</td>
-											<td class="tx-right tx-medium tx-inverse">$546.47</td>
-											<td class="tx-right tx-medium tx-danger">-$24.22</td>
-										</tr>
-										<tr>
-											<td>09 Dec 2019</td>
-											<td class="tx-right tx-medium tx-inverse">31</td>
-											<td class="tx-right tx-medium tx-inverse">$425.72</td>
-											<td class="tx-right tx-medium tx-danger">-$25.01</td>
-										</tr>
-									</tbody>
-								</table>
+					<div class="col-md-8 col-xl-8">
+						<div class="card">
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h4 class="card-title">الوصول <a href=""><i class="fa fa-plus mr-3"></i></a></h4>
+									<i class="mdi mdi-dots-vertical"></i>
+								</div>
+								<p class="card-description mb-1">اترك ملوحظاتك هنا ليراها الجميع</p>
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0"><b></b>محمد محروس</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">شغل اسامه يتكبس كلو علي ساتان</p>
+											</div>
+											<small class="text-muted mr-auto">10-3-2023</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
+								</div>
+
+								<div class="list d-flex align-items-center border-bottom py-3">
+									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
+										<span class="avatar-status bg-green"></span>
+									</div>
+									<div class="wrapper w-100 mr-3">
+										<p class="mb-0">
+										<b>Thomos</b>posted in Material</p>
+										<div class="d-sm-flex justify-content-between align-items-center">
+											<div class="d-flex align-items-center">
+												<i class="mdi mdi-clock text-muted ml-1"></i>
+												<p class="mb-0">Awesome websites!</p>
+											</div>
+											<small class="text-muted mr-auto">3 hours ago</small>
+										</div>
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- /row -->
+				<!-- /row closed -->
+
+				<!-- row -->
+
+				<!-- /row  closed-->
+
+
+
+
+
+
 			</div>
 		</div>
 		<!-- Container closed -->
@@ -459,5 +485,12 @@
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->
 <script src="{{URL::asset('assets/js/index.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>	
+<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>
+
+<!--Internal Counters -->
+<script src="{{URL::asset('assets/plugins/counters/waypoints.min.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/counters/counterup.min.js')}}"></script>
+<!--Internal Time Counter -->
+<script src="{{URL::asset('assets/plugins/counters/jquery.missofis-countdown.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/counters/counter.js')}}"></script>
 @endsection

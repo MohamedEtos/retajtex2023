@@ -50,7 +50,7 @@ class HomeController extends Controller
         $mariam_des = sublimation::where('designer','مريم محمد')->count();
         $aya_des = sublimation::where('designer','ايه ايمن')->count();
 
-        return view('home',compact(
+        return view('index',compact(
             'cust_counter',
             'total_printed',
             'printed_today',
