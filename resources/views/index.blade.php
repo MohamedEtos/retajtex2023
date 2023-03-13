@@ -6,15 +6,18 @@
 @endsection
 <!--  Owl-carousel css-->
 <link href="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
+<!---Internal  Multislider css-->
+<link href="{{URL::asset('assets/plugins/multislider/multislider.css')}}" rel="stylesheet">
 <!-- Maps css -->
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
+
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
 					<div class="left-content">
 						<div>
-						  <h2 class="main-content-title tx-24 mg-b-1 mg-b-lg-1">مرحباً بعودتك <b>{{Auth::User()->name}}</b></h2>
+						  <h2 class="main-content-title tx-24 mb-4 mg-b-1 mg-b-lg-1">مرحباً بعودتك <b>{{Auth::User()->name}}</b></h2>
 						  <p class="mg-b-0"></p>
 						</div>
 					</div>
@@ -198,21 +201,27 @@
 												</div>
 											</div>
 
-											@foreach ($fedar_order as $fedar_orders)
-												
-											<div class="row text-light mt-2">
-												<div class="col-4">{{$fedar_orders->cust_name}}</div>
-												<div class="col-4">{{$fedar_orders->total_meter}} <span>م</span></div>
-												<div class="col-4">{{{$fedar_orders->designer}}}</div>
-											</div>
+											{{-- Get fedar data  --}}
 
-											@endforeach
+											@forelse ($fedar_order as $fedar_orders)
 
-											@if($fedar_order == null)
-											<div class="row text-light mt-2">
-												<div class="col-12 h4">لا يوجد اذونات متاحه </div>
-											</div>
-											@endif
+												<div class="row text-light mt-2">
+													<div class="col-4">{{$fedar_orders->cust_name}}</div>
+													<div class="col-4">{{$fedar_orders->total_meter}} <span>م</span></div>
+													<div class="col-4">{{{$fedar_orders->designer}}}</div>
+												</div>
+
+											@empty
+
+												<div class="row text-light mt-4 text-center">
+													<div class="col-12 h4">لا يوجد اذونات لماكينه الفيدار</div>
+												</div>
+
+											@endforelse
+
+
+
+											{{-- Get fedar data closed  --}}
 
                                         </div>
                                         <div class="carousel-item flex-column carousel_height">
@@ -225,16 +234,23 @@
 												</div>
 											</div>
 
-											@foreach ($dgi_order as $dgi_orders)
-												
+											{{-- Get dgi data   --}}
 
+											@forelse ($dgi_order as $dgi_orders)
 											<div class="row text-light mt-2">
 												<div class="col-4">{{$dgi_orders->cust_name}}</div>
 												<div class="col-4">{{$dgi_orders->total_meter}} <span>م</span></div>
 												<div class="col-4">{{{$dgi_orders->designer}}}</div>
 											</div>
+											@empty
+											<div class="row text-light mt-5 text-center">
+												<div class="col-12 h4">لا يوجد اذونات لماكينه دي جي اي</div>
+											</div>
+											@endforelse
 
-											@endforeach
+
+											{{-- Get dgi data closed  --}}
+
 											
                                         </div>
                                         <div class="carousel-item flex-column carousel_height">
@@ -248,16 +264,25 @@
 													</div>
 												</div>
 
-												@foreach ($sky_order as $sky_order)
-												
+												{{-- Get fedar data  --}}
 
-												<div class="row text-light mt-2">
-													<div class="col-4">{{$sky_order->cust_name}}</div>
-													<div class="col-4">{{$sky_order->total_meter}} <span>م</span></div>
-													<div class="col-4">{{{$sky_order->designer}}}</div>
-												</div>
+												@forelse ($sky_order as $sky_order)
+
+													<div class="row text-light mt-2">
+														<div class="col-4">{{$sky_order->cust_name}}</div>
+														<div class="col-4">{{$sky_order->total_meter}} <span>م</span></div>
+														<div class="col-4">{{{$sky_order->designer}}}</div>
+													</div>
+
+												@empty
+
+													<div class="row text-light mt-5 text-center">
+														<div class="col-12 h4">لا يوجد اذونات لماكينه سكاي</div>
+													</div>
+
+												@endforelse
 	
-												@endforeach
+												{{-- Get fedar data closed  --}}
                                               
                                             </div>
                                         </div>
@@ -276,15 +301,27 @@
                                         <div class="carousel-item active flex-column carousel_height">
                                             <p class="text-white mt-2 mb-3 h5">صورة اخر اوردر</p>
 											<div class=" last_orders_div mt-2 col-12 height-30 position-relative overflow-hidden">
-												<a href="{{ url('viewfile') }}/{{ $last_order->cust_name }}/{{ $last_order->images }}" target="_blacnk">
+
+												@isset($last_order)
+												<a href="{{ url('viewfile') }}/{{ $last_order->cust_name  }}/{{ $last_order->images  }}" target="_blacnk">
 													<img src="{{asset('Attachments/'.$last_order->cust_name.'/'.$last_order->images)}}"
-														 alt="صورة"></a>											</div>
+													alt="صورة">
+												</a>											
+												@endisset
+												
+												@empty($last_order)
+												<div class="row text-light mt-4 text-center">
+													<div class="col-12 h3">لا يوجد صورة</div>
+												</div>
+												@endempty
+
+											</div>
                                         </div>
 
                                         <div class="carousel-item flex-column carousel_height">
 											<p class="text-white mt-2 mb-3 h5">بيانات اخر اوردر</p>
-                                            <p class="text-white mt-2">{{$last_order->cust_name}}</p>
-                                            <h3 class="text-white font-light">عدد الامتار : <span class="font-bold">{{$last_order->total_meter}}</span><br>  </h3>
+                                            <p class="text-white mt-2">{{$last_order->cust_name ?? ''}}</p>
+                                            <h3 class="text-white font-light">عدد الامتار : <span class="font-bold">{{$last_order->total_meter ?? ''}}</span><br>  </h3>
                                             <div class="text-white m-t-20">
 											<i>
 												@if ($last_order->printer == 'fedar')
@@ -311,8 +348,8 @@
                                         </div>
 
                                         <div class="carousel-item flex-column carousel_height">
-                                            <p class="text-white mt-2 h4"> اجمالي امتار <b>{{$last_order->cust_name}}</b></p>
-                                            <h3 class="text-white font-light mt-4"> م <span class="font-bold">{{$last_customer_meter}}</span><br></h3>
+                                            <p class="text-white mt-2 h4"> اجمالي امتار <b>  : {{$last_order->cust_name ?? ""}}</b></p>
+                                            <h2 class="text-white font-light h1 mt-4"> م <span class="font-bold">{{$last_customer_meter }}</span><br></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -367,85 +404,54 @@
 									</div>
 								</div>
 
-								<div class="list d-flex align-items-center border-bottom py-3">
-									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
-										<span class="avatar-status bg-green"></span>
-									</div>
-									<div class="wrapper w-100 mr-3">
-										<p class="mb-0">
-										<b>Thomos</b>posted in Material</p>
-										<div class="d-sm-flex justify-content-between align-items-center">
-											<div class="d-flex align-items-center">
-												<i class="mdi mdi-clock text-muted ml-1"></i>
-												<p class="mb-0">Awesome websites!</p>
-											</div>
-											<small class="text-muted mr-auto">3 hours ago</small>
-										</div>
-									</div>
-								</div>
+
 
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8 col-xl-8">
-						<div class="card">
-							<div class="card-body">
-								<div class="d-flex justify-content-between">
-									<h4 class="card-title">الوصول <a href=""><i class="fa fa-plus mr-3"></i></a></h4>
-									<i class="mdi mdi-dots-vertical"></i>
+					<div class="col-lg-8 col-md-8">
+						<div class="card custom-card">
+							<div class="card-body ht-100p">
+								<div>
+									<h3 class=" mb-4 h2">اخر الاعمال</h3>
 								</div>
-								<p class="card-description mb-1">اترك ملوحظاتك هنا ليراها الجميع</p>
-								<div class="list d-flex align-items-center border-bottom py-3">
-									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
-										<span class="avatar-status bg-green"></span>
-									</div>
+								<div id="basicSlider">
+									<div class="MS-content mt-1">
 
-									<div class="wrapper w-100 mr-3">
-										<p class="mb-0"><b></b>محمد محروس</p>
-										<div class="d-sm-flex justify-content-between align-items-center">
-											<div class="d-flex align-items-center">
-												<i class="mdi mdi-clock text-muted ml-1"></i>
-												<p class="mb-0">شغل اسامه يتكبس كلو علي ساتان</p>
+										@forelse ($all_images as $images)
+
+											<div class="item">
+												<a href="{{ url('viewfile') }}/{{ $images->cust_name  }}/{{ $images->images  }}" target="_blank"> <img class="width-100 " style="height: vh" src="{{URL::asset('Attachments')}}/{{$images->cust_name}}/{{$images->images}}" alt="" /> </a>
 											</div>
-											<small class="text-muted mr-auto">10-3-2023</small>
-										</div>
-									</div>
-								</div>
 
-								<div class="list d-flex align-items-center border-bottom py-3">
-									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
-										<span class="avatar-status bg-green"></span>
-									</div>
-									<div class="wrapper w-100 mr-3">
-										<p class="mb-0">
-										<b>Thomos</b>posted in Material</p>
-										<div class="d-sm-flex justify-content-between align-items-center">
-											<div class="d-flex align-items-center">
-												<i class="mdi mdi-clock text-muted ml-1"></i>
-												<p class="mb-0">Awesome websites!</p>
+										@empty
+
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
 											</div>
-											<small class="text-muted mr-auto">3 hours ago</small>
-										</div>
-									</div>
-								</div>
-
-								<div class="list d-flex align-items-center border-bottom py-3">
-									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
-										<span class="avatar-status bg-green"></span>
-									</div>
-									<div class="wrapper w-100 mr-3">
-										<p class="mb-0">
-										<b>Thomos</b>posted in Material</p>
-										<div class="d-sm-flex justify-content-between align-items-center">
-											<div class="d-flex align-items-center">
-												<i class="mdi mdi-clock text-muted ml-1"></i>
-												<p class="mb-0">Awesome websites!</p>
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
 											</div>
-											<small class="text-muted mr-auto">3 hours ago</small>
-										</div>
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
+											</div>
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
+											</div>
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
+											</div>
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
+											</div>
+											<div class="item">
+												<a href="#" target="_blank"> <img src="{{URL::asset('assets/img/photos/4.jpg')}}" alt="" /> </a>
+											</div>
+
+										@endforelse
+
 									</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -493,4 +499,9 @@
 <!--Internal Time Counter -->
 <script src="{{URL::asset('assets/plugins/counters/jquery.missofis-countdown.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/counters/counter.js')}}"></script>
+<!-- Internal Owl Carousel js-->
+<script src="{{URL::asset('assets/plugins/owl-carousel/owl.carousel.js')}}"></script>
+<!---Internal  Multislider js-->
+<script src="{{URL::asset('assets/plugins/multislider/multislider.js')}}"></script>
+<script src="{{URL::asset('assets/js/carousel.js')}}"></script>
 @endsection

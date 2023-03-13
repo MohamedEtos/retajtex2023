@@ -43,6 +43,7 @@ class SublimationController extends Controller
             'designer'=>$request->designer,
             'phone_number'=>$request->phone_number,
             'note'=>$request->note,
+            'images'=>'updated',
         ]);
 
         if($request->hasFile('pic')){
