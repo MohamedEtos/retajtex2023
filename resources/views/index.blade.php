@@ -213,8 +213,8 @@
 
 											@empty
 
-												<div class="row text-light mt-4 text-center">
-													<div class="col-12 h4">لا يوجد اذونات لماكينه الفيدار</div>
+												<div class="row text-light mt-5 text-center">
+													<div class="col-12 h5">لا يوجد اذونات لماكينه الفيدار</div>
 												</div>
 
 											@endforelse
@@ -244,7 +244,7 @@
 											</div>
 											@empty
 											<div class="row text-light mt-5 text-center">
-												<div class="col-12 h4">لا يوجد اذونات لماكينه دي جي اي</div>
+												<div class="col-12 h5">لا يوجد اذونات لماكينه دي جي اي</div>
 											</div>
 											@endforelse
 
@@ -277,7 +277,7 @@
 												@empty
 
 													<div class="row text-light mt-5 text-center">
-														<div class="col-12 h4">لا يوجد اذونات لماكينه سكاي</div>
+														<div class="col-12 h5">لا يوجد اذونات لماكينه سكاي</div>
 													</div>
 
 												@endforelse
@@ -309,7 +309,7 @@
 												</a>											
 												@endisset
 												
-												@empty($last_order)
+												@if($last_order->images == 'updated')
 												<div class="row text-light mt-4 text-center">
 													<div class="col-12 h3">لا يوجد صورة</div>
 												</div>
@@ -366,45 +366,40 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title">التعليقات <a href=""><i class="fa fa-plus mr-3"></i></a></h4>
+									<h4 class="card-title">التعليقات </h4>
 									<i class="mdi mdi-dots-vertical"></i>
 								</div>
-								<p class="card-description mb-1">اترك ملوحظاتك هنا ليراها الجميع</p>
-								<div class="list d-flex align-items-center border-bottom py-3">
-									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/5.jpg')}}">
-										<span class="avatar-status bg-green"></span>
-									</div>
+								<p class="card-description mb-1"></p>
 
-									<div class="wrapper w-100 mr-3">
-										<p class="mb-0"><b></b>محمد محروس</p>
+								<form action="{{url('commints.store')}}" method="post">
+									@csrf
+									<div class="input-group mb-3">
+										<button class="btn btn-outline-success" type="submit">حفظ</button>
+										<input type="text" name="commints" class="form-control" placeholder="اترك تعليقك هنا " aria-label="" aria-describedby="basic-addon1">
+									</div>
+								</form>
+
+
+
+									@forelse ($commints as $commint)
+									<div class="list d-flex align-items-center border-bottom py-3">
+										<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('avatars')}}/{{$commint->users_ship->avatar}}">
+											<span class="avatar-status bg-green"></span>
+										</div>
+										<div class="wrapper w-100 mr-3">
+										<p class="mb-0"><b></b>{{$commint->users_ship->name}}</p>
 										<div class="d-sm-flex justify-content-between align-items-center">
 											<div class="d-flex align-items-center">
 												<i class="mdi mdi-clock text-muted ml-1"></i>
-												<p class="mb-0">شغل اسامه يتكبس كلو علي ساتان</p>
+												<p class="mb-0">{{$commint->commint}}</p>
 											</div>
-											<small class="text-muted mr-auto">10-3-2023</small>
+											<small class="text-muted mr-auto">{{$commint->created_at}}</small>
 										</div>
 									</div>
 								</div>
-
-								<div class="list d-flex align-items-center border-bottom py-3">
-									<div class="avatar brround d-block cover-image" data-image-src="{{URL::asset('assets/img/faces/1.jpg')}}">
-										<span class="avatar-status bg-green"></span>
-									</div>
-									<div class="wrapper w-100 mr-3">
-										<p class="mb-0">
-										<b>Thomos</b>posted in Material</p>
-										<div class="d-sm-flex justify-content-between align-items-center">
-											<div class="d-flex align-items-center">
-												<i class="mdi mdi-clock text-muted ml-1"></i>
-												<p class="mb-0">Awesome websites!</p>
-											</div>
-											<small class="text-muted mr-auto">3 hours ago</small>
-										</div>
-									</div>
-								</div>
-
-
+									@empty
+										<h4 class="text-center mt-3">لا يوجد تعليقات</h4>
+									@endforelse
 
 							</div>
 						</div>

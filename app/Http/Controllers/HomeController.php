@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\commints;
 use App\Models\Operationpermissions;
 use App\Models\sublimation;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class HomeController extends Controller
         $last_order = sublimation::all()->last();
         $last_customer_meter = sublimation::where('cust_name',$last_order->cust_name)->sum('total_meter');
         $all_images = sublimation::all();
-
+        $commints = commints::limit(3)->orderBy('id','DESC')->get();
         
         $mohamed_meter = sublimation::where('designer','محمد محروس')->sum('total_meter');
         $mariam_meter = sublimation::where('designer','مريم محمد')->sum('total_meter');
@@ -63,6 +64,7 @@ class HomeController extends Controller
             'last_order',
             'last_customer_meter',
             'all_images',
+            'commints',
 
             'mohamed_meter',
             'mariam_meter',

@@ -138,7 +138,7 @@
 
                     {{-- 4 --}}
 
-
+ 
                     {{-- 5 --}}
 
                     <div class="row mt-4">
@@ -152,7 +152,7 @@
                         <div class="col-sm-12 col-md-4 mt-4">
                             <label for="">صورة التصميم</label>
                             <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
-                            <input required type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                            <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
                                 data-height="107" />
                         </div>
 

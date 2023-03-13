@@ -50,8 +50,8 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::post('Operationpermissions/storeFrompermissions','App\Http\Controllers\SublimationController@storeFrompermissions');
     Route::get('emps','App\Http\Controllers\EmpsController@index');
     Route::post('emps.create','App\Http\Controllers\EmpsController@create');
-
-
+    Route::post('commints.store','App\Http\Controllers\CommintsController@store');
+    // Route::get('home','App\Http\Controllers\CommintsController@view');
     
 });
 
