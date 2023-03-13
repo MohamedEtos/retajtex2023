@@ -24,5 +24,9 @@ class CommintsController extends Controller
 
     }
 
+    public static function view(){
+        $commints = commints::limit(3)->orderBy('id','DESC')->get();
+        return $commints;
+    }
 
 }

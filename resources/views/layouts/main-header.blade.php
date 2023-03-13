@@ -48,6 +48,12 @@
 									</div>
 									<div class="main-message-list chat-scroll">
 
+										
+										@php
+											$commints = App\Http\Controllers\CommintsController::view();
+
+										@endphp
+
 										@forelse ($commints as $commint)
 											
 										<a href="#" class="p-3 d-flex border-bottom">
