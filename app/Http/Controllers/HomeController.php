@@ -36,6 +36,7 @@ class HomeController extends Controller
         $designer_info = Operationpermissions::distinct()->select('designer')->get();
         $last_order = sublimation::all()->last();
         $last_customer_meter = sublimation::where('cust_name',$last_order->cust_name)->sum('total_meter');
+        $all_images = sublimation::all();
 
         
         $mohamed_meter = sublimation::where('designer','محمد محروس')->sum('total_meter');
@@ -61,6 +62,7 @@ class HomeController extends Controller
             'sky_order',
             'last_order',
             'last_customer_meter',
+            'all_images',
 
             'mohamed_meter',
             'mariam_meter',
