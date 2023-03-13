@@ -32,13 +32,13 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::get('/', 'App\Http\Controllers\HomeController@index');
     Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
-    Route::get('sublimation','App\Http\Controllers\sublimationController@index');
-    Route::get('sublimation/create','App\Http\Controllers\sublimationController@create');
-    Route::post('sublimation/store','App\Http\Controllers\sublimationController@store')->name('sublimation/store');
-    Route::get('viewfile/{cust_name}/{images_name}','App\Http\Controllers\sublimationController@openfile');
-    Route::post('sublimation/delete','App\Http\Controllers\sublimationController@destroy');
-    Route::get('sublimation/edit_order/{id}','App\Http\Controllers\sublimationController@edit');
-    Route::post('sublimation/update','App\Http\Controllers\sublimationController@update');
+    Route::get('sublimation','App\Http\Controllers\SublimationController@index');
+    Route::get('sublimation/create','App\Http\Controllers\SublimationController@create');
+    Route::post('sublimation/store','App\Http\Controllers\SublimationController@store')->name('sublimation/store');
+    Route::get('viewfile/{cust_name}/{images_name}','App\Http\Controllers\SublimationController@openfile');
+    Route::post('sublimation/delete','App\Http\Controllers\SublimationController@destroy');
+    Route::get('sublimation/edit_order/{id}','App\Http\Controllers\SublimationController@edit');
+    Route::post('sublimation/update','App\Http\Controllers\SublimationController@update');
     Route::get('Operationpermissions','App\Http\Controllers\OperationpermissionsController@index');
     Route::get('Operationpermissions/addOperation/{printer}','App\Http\Controllers\OperationpermissionsController@show');
     Route::post('Operationpermissions/addOperation/store','App\Http\Controllers\OperationpermissionsController@store');
@@ -46,10 +46,10 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::get('Operationpermissions/edit/{id}','App\Http\Controllers\OperationpermissionsController@edit');
     Route::post('Operationpermissions/update','App\Http\Controllers\OperationpermissionsController@update');
     Route::post('Operationpermissions/destroy','App\Http\Controllers\OperationpermissionsController@destroy');
-    Route::get('Operationpermissions/print/{id}','App\Http\Controllers\sublimationController@goToAddOrder');
-    Route::post('Operationpermissions/storeFrompermissions','App\Http\Controllers\sublimationController@storeFrompermissions');
-    Route::get('emps','App\Http\Controllers\empsController@index');
-    Route::post('emps.create','App\Http\Controllers\empsController@create');
+    Route::get('Operationpermissions/print/{id}','App\Http\Controllers\SublimationController@goToAddOrder');
+    Route::post('Operationpermissions/storeFrompermissions','App\Http\Controllers\SublimationController@storeFrompermissions');
+    Route::get('emps','App\Http\Controllers\EmpsController@index');
+    Route::post('emps.create','App\Http\Controllers\EmpsController@create');
 
 
     
