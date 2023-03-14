@@ -15,7 +15,7 @@
 <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 @endsection
 @section('title')
-    اضافة فاتورة
+    اضافه اذونات تشغيل
 @stop
 
 @section('page-header')

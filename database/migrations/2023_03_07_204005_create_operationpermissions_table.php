@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('printer');
             $table->date('date');
             $table->string('designer');
-            $table->string('phone_number')->nullable();
+            $table->integer('phone_number')->nullable();
             $table->string('path')->nullable();
             $table->longText('note')->nullable();
-            $table->longText('pic');
+            $table->longText('pic')->nullable();
             $table->integer('order_status')->default('0');    
             $table->softDeletes();
             $table->timestamps();

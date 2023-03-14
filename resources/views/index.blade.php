@@ -416,7 +416,7 @@
 										@forelse ($all_images as $images)
 
 											<div class="item">
-												<a href="{{ url('viewfile') }}/{{ $images->cust_name  }}/{{ $images->images  }}" target="_blank"> <img class="width-100 " style="height: vh" src="{{URL::asset('Attachments')}}/{{$images->cust_name}}/{{$images->images}}" alt="" /> </a>
+												<a href="{{ url('viewfile') }}/{{ $images->cust_name  }}/{{ $images->images  }}" target="_blank"> <img  style="height: 190px; width: 290px" src="{{URL::asset('Attachments')}}/{{$images->cust_name}}/{{$images->images}}" alt="" /> </a>
 											</div>
 
 										@empty

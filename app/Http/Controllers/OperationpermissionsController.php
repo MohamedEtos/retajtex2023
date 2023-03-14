@@ -40,6 +40,28 @@ class OperationpermissionsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'cust_name'=>'required|string',
+            'ptint_type'=>'nullable|string',
+            'total_meter'=>'nullable|integer',
+            'printer'=>'required|string',
+            'date'=>'required|date',
+            'designer'=>'required|string',
+            'phone_number'=>'nullable|integer',
+            'path'=>'nullable|string',
+            'note'=>'nullable|string',
+            'pic'=>'required|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'cust_name.required' => 'املاء حقل الاسم اولا',
+            'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
+            'date.required'=> 'لا يمكن ترك التاريخ فارغه',
+            'designer.required'=> 'برجاء تحديد المصمم ',
+            'pic.required'=>'رجاء رفع صورة اولا ',
+            'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (2MB)',
+        ]);
+
         Operationpermissions::create([
             'cust_name'=>$request->cust_name,
             'ptint_type'=>$request->ptint_type,
@@ -105,6 +127,29 @@ class OperationpermissionsController extends Controller
      */
     public function update(Request $request)
     {
+
+        $request->validate([
+            'cust_name'=>'required|string',
+            'ptint_type'=>'nullable|string',
+            'total_meter'=>'nullable|integer',
+            'printer'=>'required|string',
+            'date'=>'required|date',
+            'designer'=>'required|string',
+            'phone_number'=>'nullable|integer',
+            'path'=>'nullable|string',
+            'note'=>'nullable|string',
+            'pic'=>'required|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'cust_name.required' => 'املاء حقل الاسم اولا',
+            'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
+            'date.required'=> 'لا يمكن ترك التاريخ فارغه',
+            'designer.required'=> 'برجاء تحديد المصمم ',
+            'pic.required'=>'رجاء رفع صورة اولا ',
+            'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (2MB)',
+        ]);
+
+
         Operationpermissions::where('id',$request->id)->update([
             'cust_name'=>$request->cust_name,
             'ptint_type'=>$request->ptint_type,
@@ -143,6 +188,9 @@ class OperationpermissionsController extends Controller
     {
         // return $request;
         Operationpermissions::where('id',$request->id)->delete();
+        // File::delete(public_path('Attachments/'.$request->cust_name . '/' . $request->file_name));
         return redirect()->back()->with('success','تم الحذف');  
     }
+
+
 }

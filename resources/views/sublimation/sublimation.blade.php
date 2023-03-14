@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('title')
 سبلميشن
+@endsection
 @section('css')
 <!-- Internal Data table css -->
 <link href="{{URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -21,7 +22,7 @@
     padding: 1px
 }
 </style>
-@endsection
+
 @section('page-header')
 				<!-- breadcrumb -->
 				<div class="breadcrumb-header justify-content-between">
@@ -48,6 +49,9 @@
 }
 </script>
 @endif
+
+
+
 
 {{-- end Notify --}}
 
@@ -103,7 +107,7 @@
                                                     
                                                 {{-- if not fount images  --}}
                                                 <?php
-                                                if($sublimationn->images == null){
+                                                if($sublimationn->images == 'updated'){
                                                     echo "لا توجد صورة";
                                                 }else{
                                                 ?>
@@ -128,6 +132,8 @@
                                                             <button class="dropdown-item text-danger"
                                                             data-toggle="modal"
                                                             data-order_id="{{$sublimationn->id}}"
+                                                            data-cust_name="{{$sublimationn->cust_name}}"
+                                                            data-images="{{$sublimationn->images}}"
                                                             data-target="#delete_file"> حذف 
                                                         </button>
 														</div>
@@ -172,6 +178,8 @@
                         </p>
 
                         <input type="hidden" name="order_id" id="order_id" value="">
+                        <input type="hidden" name="images" id="images" value="">
+                        <input type="hidden" name="cust_name" id="cust_name" value="">
 
                     </div>
                     <div class="modal-footer">
@@ -275,8 +283,12 @@
     $('#delete_file').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
         var order_id = button.data('order_id')
+        var cust_name = button.data('cust_name')
+        var images = button.data('images')
         var modal = $(this)
         modal.find('.modal-body #order_id').val(order_id);
+        modal.find('.modal-body #images').val(images);
+        modal.find('.modal-body #cust_name').val(cust_name);
     })
 </script>
 

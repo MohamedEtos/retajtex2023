@@ -32,17 +32,19 @@
 @endsection
 @section('content')
 
-@error('description')
-<input id="description" type="hidden" value="{{$message}}">
-<script>
-    window.onload = function not7() {
-      notif({
-           msg: $('#description').val(),
-           type: "error"
-       });
-   }
-   </script>
-@enderror
+@if (count($errors) > 0)
+    @foreach ($errors->all() as $error)
+        <input id="cust_name" type="hidden" value="{{$error}}">
+        <script>
+            window.onload = function not7() {
+            notif({
+                msg: $('#cust_name').val(),
+                type: "error"
+            });
+        }
+        </script>
+    @endforeach
+@endif
 
 
 @if(Session::has('success'))
@@ -71,34 +73,46 @@
 
                         <div class="row mb-2">
                             <div class="col-md-3 col-sm-6 mt-4">
-                                <label for="cus_name" class="control-label">اسم العميل</label>
-                                {{-- <input type="text" class="form-control" id="cus_name" name="cus_name"> --}}
-                                <input list="brow" name="cus_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                                <label for="cust_name" class="control-label">اسم العميل</label>
+                                {{-- <input type="text" class="form-control" id="cust_name" name="cust_name"> --}}
+                                <input list="brow" name="cust_name" class="form-control" value="{{ old('cust_name') }}" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                                 <datalist id="brow">
                                     @foreach ($cust_name as $cust_names)
                                     <option value="{{$cust_names->cust_name}}">
                                     @endforeach
                                 </datalist>
+
+                                @error('cust_name')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
 
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">تكرار</label>
-                                <input type="number" class="form-control" oninput="calcMeter()"   id="copy" name="copy"
-                                     >
+                                <input type="number" class="form-control" oninput="calcMeter()" value="{{ old('copy') }}"   id="copy" name="copy">
+                                @error('copy')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
+
                             </div>
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">طول الملف</label>
-                                <input type="number" oninput="calcMeter()" class="form-control"  id="fileh" name="fileh"
-                                     >
+                                <input type="number" oninput="calcMeter()" class="form-control"  id="fileh" value="{{ old('fileh') }}" name="fileh">
+                                @error('fileh')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">اجمالي الامتار</label>
-                                <input type="number" class="form-control" id="total_meter" name="total_meter"
+                                <input type="number" class="form-control" id="total_meter" value="{{ old('total_meter') }}" name="total_meter"
                                    readonly >
+                                   @error('total_meter')
+                                   <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                         </div>
@@ -109,26 +123,35 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="printer" class="control-label">ماكينة الطباعة</label>
-                            <select name="printer" id="printer" class="form-control" >
+                            <select name="printer" id="printer" class="form-control" value="{{ old('printer') }}" >
                                 <!--placeholder-->
                                 <option value="" selected disabled>حدد ماكينة الطباعه</option>
                                 <option value="fedar">Fedar</option>
                                 <option value="dgi">DGI</option>
                                 <option value="sky">SKY</option>
                             </select>
+                            @error('printer')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                            @enderror
                         </div>
 
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="ptint_type" class="control-label">نوع الطباعه</label>
-                                <input type="text" class="form-control" id="ptint_type" name="ptint_type" placeholder="قطع / اتواب">
+                                <input type="text" class="form-control" id="ptint_type" value="{{ old('ptint_type') }}" name="ptint_type" placeholder="قطع / اتواب">
+                                @error('ptint_type')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label class="control-label ">تاريخ الطباعة</label>
-                                <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
+                                <input class="form-control fc-datepicker" name="date"  placeholder="YYYY-MM-DD"
                                     type="text" value="{{ date('Y-m-d') }}" >
                             </div>
+                            @error('date')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                        @enderror
 
                         </div>
 
@@ -138,21 +161,31 @@
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="designer" class="control-label">المصمم</label>
-                                <select name="designer" id="designer" class="form-control" >
+                                <select name="designer" id="designer" class="form-control" value="{{ old('designer') }}" >
                                     @foreach ($desingers as $desinger)
                                         <option value="{{$desinger->name}}">{{$desinger->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('designer')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="who_signed_order" class="control-label">القائم بالطباعه</label>
-                                <input type="text" class="form-control form-control-lg" id="who_signed_order" value="{{Auth::User()->name}}" name="who_signed_order" >
+                                <input type="text" class="form-control form-control-lg" id="who_signed_order"  value="{{Auth::User()->name}}" name="who_signed_order" >
+                                
+                                @error('who_signed_order')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
-                                <input type="text" readonly class="form-control form-control-lg" id="phone_number"  name="phone_number" >
+                                <input type="text" readonly class="form-control form-control-lg" id="phone_number" value="{{ old('phone_number') }}"  name="phone_number" >
+                                @error('phone_number')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                         </div>
@@ -175,7 +208,10 @@
                         <div class="row mt-4">
                             <div class="col-sm-12 col-md-8 mt-4">
                                 <label for="note">ملاحظات</label>
-                                <textarea class="form-control" id="note" name="note" rows="5"></textarea>
+                                <textarea class="form-control" id="note" value="{{ old('note') }}" name="note" rows="5"></textarea>
+                                @error('note')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
 
@@ -183,8 +219,11 @@
                             <div class="col-sm-12 col-md-4 mt-4">
                                 <label for="">صورة التصميم</label>
                                 <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
-                                <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                                <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png" value="{{ old('pic') }}"
                                     data-height="107" />
+                                    @error('pic')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                    @enderror
                             </div>
 
                             <div class="col-sm-12 col-md-4 mt-4">
@@ -252,7 +291,7 @@
 
                                         {{-- if not fount images  --}}
                                         <?php
-                                        if($sublimationn->images == null){
+                                        if($sublimationn->images == 'updated'){
                                             echo "لا توجد صورة";
                                         }else{
                                         ?>

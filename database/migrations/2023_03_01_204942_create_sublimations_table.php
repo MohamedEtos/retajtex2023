@@ -21,12 +21,12 @@ return new class extends Migration
             $table->integer('total_meter');
             $table->string('printer');
             $table->string('type_print')->nullable();
-            $table->string('date');
+            $table->date('date');
             $table->string('designer');
             $table->string('phone_number')->nullable();
             $table->string('who_signed_order');
             $table->text('note')->nullable();
-            $table->string('images');
+            $table->string('images')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
