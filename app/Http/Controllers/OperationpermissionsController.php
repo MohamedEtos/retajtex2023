@@ -51,7 +51,7 @@ class OperationpermissionsController extends Controller
             'phone_number'=>'nullable|integer',
             'path'=>'nullable|string',
             'note'=>'nullable|string',
-            'pic'=>'required|mimes:jpeg,png,jpg,gif|max:2048',
+            'pic'=>'required|mimes:jpeg,png,jpg,gif|max:3072',
         ],[
             'cust_name.required' => 'املاء حقل الاسم اولا',
             'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
@@ -138,15 +138,15 @@ class OperationpermissionsController extends Controller
             'phone_number'=>'nullable|integer',
             'path'=>'nullable|string',
             'note'=>'nullable|string',
-            'pic'=>'required|mimes:jpeg,png,jpg,gif|max:2048',
+            // 'pic'=>'mimes:jpeg,png,jpg,gif|max:2048'|nullable,
         ],[
             'cust_name.required' => 'املاء حقل الاسم اولا',
             'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
             'date.required'=> 'لا يمكن ترك التاريخ فارغه',
             'designer.required'=> 'برجاء تحديد المصمم ',
-            'pic.required'=>'رجاء رفع صورة اولا ',
+            // 'pic.required'=>'رجاء رفع صورة اولا ',
             'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
-            'pic.max'=>'لا يزيد حجم الصورة عن (2MB)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (3MB)',
         ]);
 
 

@@ -130,7 +130,14 @@
                                     <form action="{{url('Operationpermissions/destroy')}}" method="post">
                                         @csrf
                                         <input type="hidden" name="id"  value="{{$fedarp->id}}">
-                                        <input class="text-success dropdown-item small-font-btn p-1 m-1" type="submit" value="تم الانتهاء">
+                                        @php
+                                        if($fedarp->order_status == 1){
+                                          echo '  <input class="text-success dropdown-item small-font-btn p-1 m-1" type="submit" value="تم الانتهاء">';
+
+                                        }else {
+
+                                        }
+                                    @endphp
                                     </form>
                                     <a class="dropdown-item text-info small-font-btn p-1 m-1" href="{{url('Operationpermissions/edit/'.$fedarp->id)}}">تعديل</a>
 
@@ -218,7 +225,15 @@
                                         <form action="{{url('Operationpermissions/destroy')}}" method="post">
                                             @csrf
                                             <input type="hidden" name="id"  value="{{$dgip->id}}">
-                                            <input class="text-success dropdown-item small-font-btn p-1 m-1" type="submit" value="تم الانتهاء">
+                                            @php
+                                            if($dgip->order_status == 1){
+                                              echo '  <input class="text-success dropdown-item small-font-btn p-1 m-1" type="submit" value="تم الانتهاء">';
+    
+                                            }else {
+    
+                                            }
+                                        @endphp
+                                            
                                         </form>
                                         <a class="dropdown-item text-info small-font-btn p-1 m-1" href="{{url('Operationpermissions/edit/'.$dgip->id)}}">تعديل</a>
 
@@ -310,7 +325,15 @@
                                         <form action="{{url('Operationpermissions/destroy')}}" method="post">
                                             @csrf
                                             <input type="hidden" name="id"  value="{{$skyp->id}}">
-                                            <input class="text-success dropdown-item small-font-btn p-1 m-1" type="submit" value="تم الانتهاء">
+                                            @php
+                                            if($skyp->order_status == 1){
+                                              echo '<input class="text-success dropdown-item small-font-btn p-1 m-1" type="submit" value="تم الانتهاء">';
+    
+                                            }else {
+    
+                                            }
+                                        @endphp
+                                            
                                         </form>
                                         <a class="dropdown-item text-info small-font-btn p-1 m-1" href="{{url('Operationpermissions/edit/'.$skyp->id)}}">تعديل</a>
 
