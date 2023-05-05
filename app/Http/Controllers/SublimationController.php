@@ -77,17 +77,26 @@ class SublimationController extends Controller
 
         if($request->hasFile('pic')){
 
-            $ext = '.'.$request->pic->getClientOriginalExtension();
-            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
 
-            $id = sublimation::latest()->first()->id;
+            $image = $request->file('pic');
 
-            $customer_id = $request->id;
+            // change file Extension
+            $Originalext = '.'.$request->pic->getClientOriginalExtension();
+            $ext = 'webp';
+            $imageConvert = \Image::make($image->getRealPath())->resize(600,600)->stream($ext,100);
+
+            // move file to public local store
+            $imageName = str_replace($Originalext, date('d-m-Y-H-i') , $request->pic->getClientOriginalName());
+            Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
+
+            // start save name in database 
+            $id = Operationpermissions::latest()->first()->id;
 
             sublimation::where('id',$id)->update([
-                'images' => $imageName,
+                'images' => $imageName.'.'.$ext,
             ]);
+
+
 
         }
         return redirect()->back()->with('success','تم تسجيل الاوردر');
@@ -140,12 +149,22 @@ class SublimationController extends Controller
 
         if($request->hasFile('pic')){
 
-            $ext = '.'.$request->pic->getClientOriginalExtension();
-            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
+            $image = $request->file('pic');
 
-            sublimation::where('id',$request->id)->update([
-                'images' => $imageName,
+            // change file Extension
+            $Originalext = '.'.$request->pic->getClientOriginalExtension();
+            $ext = 'webp';
+            $imageConvert = \Image::make($image->getRealPath())->resize(600,600)->stream($ext,100);
+
+            // move file to public local store
+            $imageName = str_replace($Originalext, date('d-m-Y-H-i') , $request->pic->getClientOriginalName());
+            Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
+
+            // start save name in database 
+            $id = Operationpermissions::latest()->first()->id;
+
+            sublimation::where('id',$id)->update([
+                'images' => $imageName.'.'.$ext,
             ]);
 
         }
@@ -214,7 +233,7 @@ class SublimationController extends Controller
         'designer'=>'required|string',
         'phone_number'=>'nullable|integer',
         'note'=>'nullable|string',
-        // 'pic'=>'required|mimes:jpeg,png,jpg,gif|max:1024',
+        'pic'=>'nullable|mimes:jpeg,png,jpg,gif|max:4096',
     ],[
         'cust_name.required' => 'املاء حقل الاسم اولا',
         'copy.required'=>'رجاء اكتب عدد التكرارات',
@@ -225,7 +244,7 @@ class SublimationController extends Controller
         'designer.required'=> 'برجاء تحديد المصمم ',
         // 'pic.required'=>'رجاء رفع صورة اولا ',
         'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
-        'pic.max'=>'لا يزيد حجم الصورة عن (1MB)',
+        'pic.max'=>'لا يزيد حجم الصورة عن (4MB)',
     ]);
 
         sublimation::where('id',$request->id)->update([
@@ -244,12 +263,22 @@ class SublimationController extends Controller
 
         if($request->hasFile('pic')){
 
-            $ext = '.'.$request->pic->getClientOriginalExtension();
-            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
+            $image = $request->file('pic');
 
-            sublimation::where('id',$request->id)->update([
-                'images' => $imageName,
+            // change file Extension
+            $Originalext = '.'.$request->pic->getClientOriginalExtension();
+            $ext = 'webp';
+            $imageConvert = \Image::make($image->getRealPath())->resize(600,600)->stream($ext,100);
+
+            // move file to public local store
+            $imageName = str_replace($Originalext, date('d-m-Y-H-i') , $request->pic->getClientOriginalName());
+            Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
+
+            // start save name in database 
+            $id = Operationpermissions::latest()->first()->id;
+
+            sublimation::where('id',$id)->update([
+                'images' => $imageName.'.'.$ext,
             ]);
 
         }

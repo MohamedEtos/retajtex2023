@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Operationpermissions;
 use App\Models\sublimation;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 class OperationpermissionsController extends Controller
 {
     /**
@@ -51,7 +51,7 @@ class OperationpermissionsController extends Controller
             'phone_number'=>'nullable|integer',
             'path'=>'nullable|string',
             'note'=>'nullable|string',
-            'pic'=>'required|mimes:jpeg,png,jpg,gif|max:3072',
+            'pic'=>'nullable|mimes:jpeg,png,jpg,gif|max:4096',
         ],[
             'cust_name.required' => 'املاء حقل الاسم اولا',
             'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
@@ -59,7 +59,7 @@ class OperationpermissionsController extends Controller
             'designer.required'=> 'برجاء تحديد المصمم ',
             'pic.required'=>'رجاء رفع صورة اولا ',
             'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
-            'pic.max'=>'لا يزيد حجم الصورة عن (2MB)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (4MB)',
         ]);
 
         Operationpermissions::create([
@@ -77,15 +77,25 @@ class OperationpermissionsController extends Controller
 
         if($request->hasFile('pic')){
 
-            $ext = '.'.$request->pic->getClientOriginalExtension();
-            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
 
+            $image = $request->file('pic');
+
+            // change file Extension
+            $Originalext = '.'.$request->pic->getClientOriginalExtension();
+            $ext = 'webp';
+            $imageConvert = \Image::make($image->getRealPath())->resize(600,600)->stream($ext,100);
+
+            // move file to public local store
+            $imageName = str_replace($Originalext, date('d-m-Y-H-i') , $request->pic->getClientOriginalName());
+            Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
+
+            // start save name in database 
             $id = Operationpermissions::latest()->first()->id;
 
             Operationpermissions::where('id',$id)->update([
-                'pic' => $imageName,
+                'pic' => $imageName.'.'.$ext,
             ]);
+
 
         }
         
@@ -138,7 +148,7 @@ class OperationpermissionsController extends Controller
             'phone_number'=>'nullable|integer',
             'path'=>'nullable|string',
             'note'=>'nullable|string',
-            // 'pic'=>'mimes:jpeg,png,jpg,gif|max:2048'|nullable,
+            'pic'=>'nullable|mimes:jpeg,png,jpg,gif|max:4096',
         ],[
             'cust_name.required' => 'املاء حقل الاسم اولا',
             'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
@@ -146,7 +156,7 @@ class OperationpermissionsController extends Controller
             'designer.required'=> 'برجاء تحديد المصمم ',
             // 'pic.required'=>'رجاء رفع صورة اولا ',
             'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
-            'pic.max'=>'لا يزيد حجم الصورة عن (3MB)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (4MB)',
         ]);
 
 
@@ -164,14 +174,26 @@ class OperationpermissionsController extends Controller
 
         if($request->hasFile('pic')){
 
-            $ext = '.'.$request->pic->getClientOriginalExtension();
-            $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
 
 
-            Operationpermissions::where('id',$request->id)->update([
-                'pic' => $imageName,
+            $image = $request->file('pic');
+
+            // change file Extension
+            $Originalext = '.'.$request->pic->getClientOriginalExtension();
+            $ext = 'webp';
+            $imageConvert = \Image::make($image->getRealPath())->resize(600,600)->stream($ext,100);
+
+            // move file to public local store
+            $imageName = str_replace($Originalext, date('d-m-Y-H-i') , $request->pic->getClientOriginalName());
+            Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
+
+            // start save name in database 
+            $id = Operationpermissions::latest()->first()->id;
+
+            Operationpermissions::where('id',$id)->update([
+                'pic' => $imageName.'.'.$ext,
             ]);
+
 
         }
         
