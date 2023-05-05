@@ -32,17 +32,20 @@
 @endsection
 @section('content')
 
-@error('description')
-<input id="description" type="hidden" value="{{$message}}">
-<script>
-    window.onload = function not7() {
-      notif({
-           msg: $('#description').val(),
-           type: "error"
-       });
-   }
-   </script>
-@enderror
+
+@if (count($errors) > 0)
+    @foreach ($errors->all() as $error)
+        <input id="cust_name" type="hidden" value="{{$error}}">
+        <script>
+            window.onload = function not7() {
+            notif({
+                msg: $('#cust_name').val(),
+                type: "error"
+            });
+        }
+        </script>
+    @endforeach
+@endif
 
 
 @if(Session::has('success'))
@@ -71,34 +74,43 @@
                     <input type="hidden" value="{{$Operation_id}}" name="Operation_id">
                         <div class="row mb-2">
                             <div class="col-md-3 col-sm-6 mt-4">
-                                <label for="cus_name" class="control-label">اسم العميل</label>
-                                {{-- <input type="text" class="form-control" id="cus_name" name="cus_name"> --}}
+                                <label for="cust_name" class="control-label">اسم العميل</label>
+                                {{-- <input type="text" class="form-control" id="cust_name" name="cust_name"> --}}
                                 <input list="brow" value="{{$dataFromPermss->cust_name}}" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                                 <datalist id="brow">
                                     @foreach ($cust_name as $cust_names)
                                     <option value="{{$cust_names->cust_name}}">
                                     @endforeach
                                 </datalist>
+                                @error('cust_name')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
 
 
                             <div class="col-md-3 col-sm-6 mt-4">
-                                <label for="inputName" class="control-label">تكرار</label>
-                                <input type="number" class="form-control" oninput="calcMeter()"   id="copy" name="copy"
-                                     >
+                                <label for="copy" class="control-label">تكرار</label>
+                                <input type="number" class="form-control" oninput="calcMeter()"   id="copy" name="copy">
+                                @error('copy')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">طول الملف</label>
-                                <input type="number" oninput="calcMeter()" class="form-control"  id="fileh" name="fileh"
-                                     >
+                                <input type="number" oninput="calcMeter()" class="form-control"  id="fileh" name="fileh">
+                                @error('fileh')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-3 col-sm-6 mt-4">
                                 <label for="inputName" class="control-label">اجمالي الامتار</label>
-                                <input type="number" value="{{$dataFromPermss->total_meter}}" class="form-control" id="total_meter" name="total_meter"
-                                   readonly >
+                                <input type="number" value="{{$dataFromPermss->total_meter}}" class="form-control" id="total_meter" name="total_meter" readonly >
+                                @error('total_meter')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                         </div>
@@ -116,18 +128,27 @@
                                 <option value="dgi">DGI</option>
                                 <option value="sky">SKY</option>
                             </select>
+                            @error('printer')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                            @enderror
                         </div>
 
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="ptint_type" class="control-label">نوع الطباعه</label>
                                 <input type="text" value="{{$dataFromPermss->ptint_type}}" class="form-control" id="ptint_type" name="ptint_type" placeholder="قطع / اتواب">
+                                @error('ptint_type')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label class="control-label ">تاريخ الطباعة</label>
                                 <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{$dataFromPermss->date}}" >
+                                    @error('date')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                    @enderror
                             </div>
 
                         </div>
@@ -144,16 +165,23 @@
                                         <option value="{{$desinger->name}}">{{$desinger->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('designer')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="who_signed_order" class="control-label">القائم بالطباعه</label>
                                 <input type="text" class="form-control form-control-lg" id="who_signed_order" value="{{Auth::User()->name}}" name="who_signed_order" >
+                                @error('who_signed_order')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
                                 <input type="text" readonly class="form-control form-control-lg" value="{{$dataFromPermss->phone_number}}" id="phone_number"  name="phone_number" >
+                                
                             </div>
 
                         </div>
@@ -271,7 +299,7 @@
 
                                         {{-- if not fount images  --}}
                                         <?php
-                                        if($sublimationn->images == null){
+                                        if($sublimationn->images == 'updated'){
                                             echo "لا توجد صورة";
                                         }else{
                                         ?>

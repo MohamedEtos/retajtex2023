@@ -15,7 +15,7 @@
 <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 @endsection
 @section('title')
-    اضافة فاتورة
+اضافه اذن تشغيل 
 @stop
 
 @section('page-header')
@@ -31,17 +31,19 @@
 @endsection
 @section('content')
 
-@error('description')
-<input id="description" type="hidden" value="{{$message}}">
-<script>
-    window.onload = function not7() {
-      notif({
-           msg: $('#description').val(),
-           type: "error"
-       });
-   }
-   </script>
-@enderror
+@if (count($errors) > 0)
+    @foreach ($errors->all() as $error)
+        <input id="cust_name" type="hidden" value="{{$error}}">
+        <script>
+            window.onload = function not7() {
+            notif({
+                msg: $('#cust_name').val(),
+                type: "error"
+            });
+        }
+        </script>
+    @endforeach
+@endif
 
 
 @if(Session::has('success'))
@@ -68,27 +70,36 @@
 
                     <div class="row mb-2">
                         <div class="col-md-4 col-sm-6 mt-4">
-                            <label for="cus_name" class="control-label">اسم العميل</label>
-                            <input required list="brow" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                            <label for="cust_name" class="control-label">اسم العميل</label>
+                            <input required list="brow" value="{{old('cust_name')}}" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                            
                             <datalist id="brow">
                                 @foreach ($cust_name as $cust_names)
                                 <option value="{{$cust_names->cust_name}}">
                                 @endforeach
                             </datalist>
+                            @error('cust_name')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                        @enderror
                         </div>
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="ptint_type" class="control-label">عدد القطع او نوع الطباعه</label>
-                            <input  type="text" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
+                            <input  type="text" value="{{old('ptint_type')}}"  class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
+                            @error('ptint_type')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                        @enderror
                         </div>
 
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="inputName" class="control-label">الامتار المطلوبه </label>
-                            <input type="number" class="form-control" id="total_meter" name="total_meter"
+                            <input type="number" value="{{old('total_meter')}}" class="form-control" id="total_meter" name="total_meter"
                                 >
                         </div>
-
+                        @error('total_meter')
+                        <p class="border-bottom  border-danger mt-2 col-12"></p>
+                    @enderror
                     </div>
 
                     {{-- 2 --}}
@@ -105,17 +116,28 @@
                                     <option value="dgi">DGI</option>
                                     <option value="sky">SKY</option>
                                 </select>
+                                @error('printer')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                            @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
-                                <label required class="control-label ">تاريخ تاكيد الاوردر</label>
+                                <label  class="control-label ">تاريخ تاكيد الاوردر</label>
                                 <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{ date('Y-m-d') }}" >
+                                    @error('date')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
     
+                            
+
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="designer" class="control-label">المصمم</label>
                                 <input required type="text" class="form-control form-control-lg" id="designer" value="{{Auth::User()->name}}" name="designer" >
+                                @error('designer')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                            @enderror
                             </div>
 
                     </div>
@@ -126,12 +148,12 @@
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="phone_number"  class="control-label">رقم تلفون العميل</label>
-                            <input readonly type="text" class="form-control form-control-lg" id="phone_number" placeholder="(اخياري)"  name="phone_number" >
+                            <input readonly type="text" value="{{old('phone_number')}}" class="form-control form-control-lg" id="phone_number" placeholder="(اخياري)"  name="phone_number" >
                         </div>
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="path"  class="control-label">مكان الملف</label>
-                            <input  type="text" class="form-control form-control-lg" id="path" placeholder="(اخياري)"  name="path" >
+                            <input  type="text" readonly value="{{old('path')}}" class="form-control  form-control-lg" id="path" placeholder="(اخياري)"  name="path" >
                         </div>
 
                     </div>
@@ -144,7 +166,7 @@
                     <div class="row mt-4">
                         <div class="col-sm-12 col-md-8 mt-4">
                             <label for="note">ملاحظات</label>
-                            <textarea class="form-control" id="note" name="note" rows="5"></textarea>
+                            <textarea class="form-control" id="note" name="note" rows="5" value="{{old('note')}}"></textarea>
                         </div>
 
 
@@ -152,7 +174,7 @@
                         <div class="col-sm-12 col-md-4 mt-4">
                             <label for="">صورة التصميم</label>
                             <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
-                            <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                            <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png" value="{{old('pic')}}"
                                 data-height="107" />
                         </div>
 

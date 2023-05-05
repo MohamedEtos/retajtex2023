@@ -10,6 +10,14 @@
 <link href="{{URL::asset('assets/plugins/multislider/multislider.css')}}" rel="stylesheet">
 <!-- Maps css -->
 <link href="{{URL::asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
+<style>
+    .ttt{
+            overflow: hidden;
+    display: -webkit-box;
+   -webkit-line-clamp: 5; /* Limit to 3 lines */
+   -webkit-box-orient: vertical;
+    }
+</style>
 
 @endsection
 @section('page-header')
@@ -67,7 +75,7 @@
 									</div>
 									<div class="mr-auto">
 										<h5 class="tx-13 tx-white-8 mb-3">اجمالي الامتار المطبوعه</h5>
-										<h2 class="counter mb-0 text-white text-left">{{$total_printed}}</h2>
+									<h2 class="counter ttt mb-0 text-white text-left">{{$total_printed}}</h2>
 									</div>
 								</div>
 							</div>
@@ -416,7 +424,7 @@
 										@forelse ($all_images as $images)
 
 											<div class="item">
-												<a href="{{ url('viewfile') }}/{{ $images->cust_name  }}/{{ $images->images  }}" target="_blank"> <img class="width-100 " style="height: vh" src="{{URL::asset('Attachments')}}/{{$images->cust_name}}/{{$images->images}}" alt="" /> </a>
+												<a href="{{ url('viewfile') }}/{{ $images->cust_name  }}/{{ $images->images  }}" target="_blank"> <img  style="height: 190px; width: 290px" src="{{URL::asset('Attachments')}}/{{$images->cust_name}}/{{$images->images}}" alt="" /> </a>
 											</div>
 
 										@empty

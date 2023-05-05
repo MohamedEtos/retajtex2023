@@ -31,17 +31,19 @@
 @endsection
 @section('content')
 
-@error('description')
-<input id="description" type="hidden" value="{{$message}}">
-<script>
-    window.onload = function not7() {
-      notif({
-           msg: $('#description').val(),
-           type: "error"
-       });
-   }
-   </script>
-@enderror
+@if (count($errors) > 0)
+    @foreach ($errors->all() as $error)
+        <input id="cust_name" type="hidden" value="{{$error}}">
+        <script>
+            window.onload = function not7() {
+            notif({
+                msg: $('#cust_name').val(),
+                type: "error"
+            });
+        }
+        </script>
+    @endforeach
+@endif
 
 
 @if(Session::has('success'))
@@ -68,24 +70,33 @@
                     <input type="hidden" name="id" value="{{$edit->id}}">
                     <div class="row mb-2">
                         <div class="col-md-4 col-sm-6 mt-4">
-                            <label for="cus_name" class="control-label">اسم العميل</label>
+                            <label for="cust_name" class="control-label">اسم العميل</label>
                             <input list="brow" name="cust_name" value="{{$edit->cust_name}}" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                             <datalist id="brow">
                                 @foreach ($cust_name as $cust_names)
                                 <option value="{{$cust_names->cust_name}}">
                                 @endforeach
                             </datalist>
+                            @error('cust_name')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                        @enderror
                         </div>
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="ptint_type" class="control-label">عدد القطع او نوع الطباعه</label>
                             <input type="text" value="{{$edit->ptint_type}}" class="form-control" id="print_type" name="ptint_type" placeholder="عدد القطع او نوع الطباعه">
+                            @error('ptint_type')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                        @enderror
                         </div>
 
 
                         <div class="col-md-4 col-sm-6 mt-4">
                             <label for="inputName" class="control-label">الامتار المطلوبه </label>
                             <input type="number" value="{{$edit->total_meter}}" class="form-control" id="total_meter" name="total_meter">
+                            @error('total_meter')
+                            <p class="border-bottom  border-danger mt-2 col-12"></p>
+                        @enderror
                         </div>
 
                     </div>
@@ -104,17 +115,26 @@
                                     <option value="dgi">DGI</option>
                                     <option value="sky">SKY</option>
                                 </select>
+                                @error('printer')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                            @enderror
                             </div>
 
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label class="control-label ">تاريخ تاكيد الاوردر</label>
                                 <input class="form-control fc-datepicker" name="date" placeholder="YYYY-MM-DD"
                                     type="text" value="{{$edit->date}}" >
+                                    @error('date')
+                                    <p class="border-bottom  border-danger mt-2 col-12"></p>
+                                @enderror
                             </div>
     
                             <div class="col-md-4 col-sm-6 mt-4">
                                 <label for="designer" class="control-label">المصمم</label>
                                 <input type="text" class="form-control form-control-lg" id="designer" value="{{$edit->designer}}" name="designer" >
+                                @error('designer')
+                                <p class="border-bottom  border-danger mt-2 col-12"></p>
+                            @enderror
                             </div>
 
                     </div>

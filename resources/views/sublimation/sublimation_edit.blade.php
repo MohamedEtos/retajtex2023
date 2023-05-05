@@ -71,8 +71,8 @@
 
                         <div class="row mb-2">
                             <div class="col-md-3 col-sm-6 mt-4">
-                                <label for="cus_name" class="control-label">اسم العميل</label>
-                                <input type="text" class="form-control" id="cus_name" name="cus_name">
+                                <label for="cust_name" class="control-label">اسم العميل</label>
+                                <input type="text" class="form-control" id="cust_name" name="cust_name">
                             </div>
 
                             <div class="col-md-3 col-sm-6 mt-4">

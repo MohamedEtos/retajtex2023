@@ -74,9 +74,9 @@
 
                         <div class="row mb-2">
                             <div class="col-md-3 col-sm-6 mt-4">
-                                <label for="cus_name" class="control-label">اسم العميل</label>
+                                <label for="cust_name" class="control-label">اسم العميل</label>
                                 <input type="hidden" class="form-control" id="id" name="id" value="{{$sublimation->id}}">
-                                <input list="brow" value="{{$sublimation->cust_name}}" name="cus_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
+                                <input list="brow" value="{{$sublimation->cust_name}}" name="cust_name" class="form-control" placeholder="يرجي التاكد ان اسم العميل موجود بالفعل" type="text">
                                 <datalist id="brow">
                                     @foreach ($cust_name as $cust_names)
                                     <option value="{{$cust_names->cust_name}}">

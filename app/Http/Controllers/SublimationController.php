@@ -7,6 +7,8 @@ use App\Models\old_order_sublimations;
 use App\Models\Operationpermissions;
 use App\Models\sublimation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class SublimationController extends Controller
 {
@@ -31,8 +33,35 @@ class SublimationController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'cust_name'=>'required|string',
+            'copy'=>'required|integer',
+            'fileh'=>'required|integer',
+            // 'total_meter'=>'required|integer',
+            'printer'=>'required|string',
+            'type_print'=>'nullable|string',
+            'date'=>'required|date',
+            'who_signed_order'=>'required|string',
+            'designer'=>'required|string',
+            'phone_number'=>'nullable|integer',
+            'note'=>'nullable|string',
+            'pic'=>'nullable|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            'cust_name.required' => 'املاء حقل الاسم اولا',
+            'copy.required'=>'رجاء اكتب عدد التكرارات',
+            'fileh.required'=>'اكتب طول الملف بال سم',
+            'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
+            'date.required'=> 'لا يمكن ترك التاريخ فارغه',
+            'who_signed_order.required'=>'من قام بتسجيل الاوردر ؟',
+            'designer.required'=> 'برجاء تحديد المصمم ',
+            'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (2MB)',
+        ]);
+
+
+
         sublimation::create([
-            'cust_name'=>$request->cus_name,
+            'cust_name'=>$request->cust_name,
             'copy'=>$request->copy,
             'fileh'=>$request->fileh,
             'total_meter'=>$request->total_meter,
@@ -50,7 +79,7 @@ class SublimationController extends Controller
 
             $ext = '.'.$request->pic->getClientOriginalExtension();
             $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cus_name),$imageName);
+            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
 
             $id = sublimation::latest()->first()->id;
 
@@ -69,6 +98,31 @@ class SublimationController extends Controller
 
     public function storeFrompermissions(Request $request)
     {
+        $request->validate([
+            'cust_name'=>'required|string',
+            'copy'=>'required|integer',
+            'fileh'=>'required|integer',
+            // 'total_meter'=>'required|integer',
+            'printer'=>'required|string',
+            'type_print'=>'nullable|string',
+            'date'=>'required|date',
+            'who_signed_order'=>'required|string',
+            'designer'=>'required|string',
+            'phone_number'=>'nullable|integer',
+            'note'=>'nullable|string',
+            'pic'=>'nullable|mimes:jpeg,png,jpg,gif|max:1024',
+        ],[
+            'cust_name.required' => 'املاء حقل الاسم اولا',
+            'copy.required'=>'رجاء اكتب عدد التكرارات',
+            'fileh.required'=>'اكتب طول الملف بال سم',
+            'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
+            'date.required'=> 'لا يمكن ترك التاريخ فارغه',
+            'who_signed_order.required'=>'من قام بتسجيل الاوردر ؟',
+            'designer.required'=> 'برجاء تحديد المصمم ',
+            'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
+            'pic.max'=>'لا يزيد حجم الصورة عن (1MB)',
+        ]);
+
         sublimation::create([
             'cust_name'=>$request->cust_name,
             'copy'=>$request->copy,
@@ -147,9 +201,36 @@ class SublimationController extends Controller
         'order_id'=>$request->id
        ]);
 
+
+       $request->validate([
+        'cust_name'=>'required|string',
+        'copy'=>'required|integer',
+        'fileh'=>'required|integer',
+        // 'total_meter'=>'required|integer',
+        'printer'=>'required|string',
+        'type_print'=>'nullable|string',
+        'date'=>'required|date',
+        'who_signed_order'=>'required|string',
+        'designer'=>'required|string',
+        'phone_number'=>'nullable|integer',
+        'note'=>'nullable|string',
+        // 'pic'=>'required|mimes:jpeg,png,jpg,gif|max:1024',
+    ],[
+        'cust_name.required' => 'املاء حقل الاسم اولا',
+        'copy.required'=>'رجاء اكتب عدد التكرارات',
+        'fileh.required'=>'اكتب طول الملف بال سم',
+        'printer.required'=> 'لا يمكن ترك الماكيمه فارغه',
+        'date.required'=> 'لا يمكن ترك التاريخ فارغه',
+        'who_signed_order.required'=>'من قام بتسجيل الاوردر ؟',
+        'designer.required'=> 'برجاء تحديد المصمم ',
+        // 'pic.required'=>'رجاء رفع صورة اولا ',
+        'pic.mimes'=>'ندعم فقط (jpeg,png,jpg,gif)',
+        'pic.max'=>'لا يزيد حجم الصورة عن (1MB)',
+    ]);
+
         sublimation::where('id',$request->id)->update([
-            'cust_name'=>$request->cus_name,
-            'copy'=>$request->copy,
+            'cust_name'=>$request->cust_name,
+            'copy'=>$request->fileh,
             'fileh'=>$request->fileh,
             'total_meter'=>$request->total_meter,
             'printer'=>$request->printer,
@@ -165,7 +246,7 @@ class SublimationController extends Controller
 
             $ext = '.'.$request->pic->getClientOriginalExtension();
             $imageName = str_replace($ext, date('d-m-Y-H-i') . $ext, $request->pic->getClientOriginalName());
-            $request->pic->move(public_path('Attachments/'.$request->cus_name),$imageName);
+            $request->pic->move(public_path('Attachments/'.$request->cust_name),$imageName);
 
             sublimation::where('id',$request->id)->update([
                 'images' => $imageName,
@@ -180,6 +261,7 @@ class SublimationController extends Controller
     public function destroy(Request $request)
     {
         sublimation::where('id',$request->order_id)->delete();
+        File::delete(public_path('Attachments/'.$request->cust_name . '/' . $request->images));
         return redirect()->back()->with('success','تم حذف الاوردر');
 
     }

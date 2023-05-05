@@ -19,3 +19,54 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+
+# Perhaps better to whitelist expires rules? Perhaps.
+  ExpiresDefault                          "access plus 4 days"
+
+# cache.appcache needs re-requests in FF 3.6 (thanks Remy ~Introducing HTML5)
+  ExpiresByType text/cache-manifest       "access plus 0 seconds"
+
+# Your document html
+  ExpiresByType text/html                 "access plus 0 seconds"
+
+# Data
+  ExpiresByType application/json          "access plus 0 seconds"
+  ExpiresByType application/xml           "access plus 0 seconds"
+  ExpiresByType text/xml                  "access plus 0 seconds"
+
+# Feed
+  ExpiresByType application/atom+xml      "access plus 1 hour"
+  ExpiresByType application/rss+xml       "access plus 1 hour"
+
+# Favicon (cannot be renamed)
+  ExpiresByType image/x-icon              "access plus 4 days"
+
+# Media: images, video, audio
+  ExpiresByType audio/ogg                 "access plus 4 days"
+  ExpiresByType image/gif                 "access plus 4 days"
+  ExpiresByType image/jpeg                "access plus 4 days"
+  ExpiresByType image/png                 "access plus 4 days"
+  ExpiresByType video/mp4                 "access plus 4 days"
+  ExpiresByType video/ogg                 "access plus 4 days"
+  ExpiresByType video/webm                "access plus 4 days"
+
+# HTC files  (css3pie)
+  ExpiresByType text/x-component          "access plus 4 days"
+
+# Webfonts
+  ExpiresByType application/vnd.ms-fontobject "access plus 4 days"
+  ExpiresByType application/x-font-ttf    "access plus 4 days"
+  ExpiresByType application/x-font-woff   "access plus 4 days"
+  ExpiresByType font/opentype             "access plus 4 days"
+  ExpiresByType image/svg+xml             "access plus 4 days"
+
+# CSS and JavaScript
+  ExpiresByType application/javascript    "access plus 4 days"
+  ExpiresByType text/css                  "access plus 4 days"
+
+</IfModule>
