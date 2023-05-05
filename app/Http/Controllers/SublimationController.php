@@ -8,6 +8,7 @@ use App\Models\Operationpermissions;
 use App\Models\sublimation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class SublimationController extends Controller
@@ -161,7 +162,7 @@ class SublimationController extends Controller
             Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
 
             // start save name in database 
-            $id = Operationpermissions::latest()->first()->id;
+            $id = sublimation::latest()->first()->id;
 
             sublimation::where('id',$id)->update([
                 'images' => $imageName.'.'.$ext,
@@ -275,7 +276,7 @@ class SublimationController extends Controller
             Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
 
             // start save name in database 
-            $id = Operationpermissions::latest()->first()->id;
+            $id = sublimation::latest()->first()->id;
 
             sublimation::where('id',$id)->update([
                 'images' => $imageName.'.'.$ext,
