@@ -188,9 +188,9 @@ class OperationpermissionsController extends Controller
             Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
 
             // start save name in database 
-            $id = Operationpermissions::latest()->first()->id;
+            // $id = Operationpermissions::latest()->first()->id;
 
-            Operationpermissions::where('id',$id)->update([
+            Operationpermissions::where('id',$request->id)->update([
                 'pic' => $imageName.'.'.$ext,
             ]);
 

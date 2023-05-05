@@ -276,9 +276,9 @@ class SublimationController extends Controller
             Storage::disk('storeImagesInPublic')->put('Attachments/'.$request->cust_name.'/'.$imageName.'.'.$ext,$imageConvert);
 
             // start save name in database 
-            $id = sublimation::latest()->first()->id;
+            // $id = sublimation::latest()->first()->id;
 
-            sublimation::where('id',$id)->update([
+            sublimation::where('id',$request->id)->update([
                 'images' => $imageName.'.'.$ext,
             ]);
 
